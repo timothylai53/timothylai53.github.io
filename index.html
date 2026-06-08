@@ -11,8 +11,7 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
 <style>
 
@@ -254,9 +253,7 @@ section{
 }
 
 .project-image{
-
     height:220px;
-
     background:
     linear-gradient(
     135deg,
@@ -268,6 +265,15 @@ section{
     justify-content:center;
 
     font-size:4rem;
+    overflow:hidden; /* Keeps image bounds contained inside card radius */
+}
+
+/* NEW: Styles to cleanly scale and fit your hosted image */
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .project-content{
@@ -481,7 +487,7 @@ experience and technical skills.
 <div class="project-card">
 
 <div class="project-image">
-<img src="caterflowss.jpg" alt="Caterflowss Image">
+<img src="caterflowss.jpg" alt="Catering Management System Screenshot">
 </div>
 
 <div class="project-content">
