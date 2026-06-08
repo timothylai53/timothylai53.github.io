@@ -3,78 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Timothy Lai | Software Engineering Portfolio</title>
+    <title>Timothy Lai | Software Engineer Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --bg-main: #0a0f1d;
+            --bg-card: #111a2e;
+            --accent-glow: #00f2fe;
+            --accent-blue: #0077b5;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --border-color: #1e293b;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0d1117;
-            color: #c9d1d9;
+            font-family: 'Fira Code', 'Segoe UI', monospace;
+            background-color: var(--bg-main);
+            color: var(--text-main);
             line-height: 1.6;
             margin: 0;
             padding: 0;
+            overflow-x: hidden;
         }
+
+        /* Animated Cyber Grid Background Effect */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(0, 242, 254, 0.02) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(0, 242, 254, 0.02) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: -1;
+        }
+
         header {
-            background: linear-gradient(135deg, #1f2937, #111827);
-            padding: 3rem 2rem;
+            position: relative;
+            background: radial-gradient(circle at top right, #132247, var(--bg-main));
+            padding: 5rem 2rem 4rem 2rem;
             text-align: center;
-            border-bottom: 2px solid #2088FF;
+            border-bottom: 1px solid var(--border-color);
         }
+
         header h1 {
-            color: #58a6ff;
-            margin: 0 0 0.5rem 0;
-            font-size: 2.5rem;
-        }
-        header p {
-            color: #8b949e;
+            font-size: 3rem;
             margin: 0;
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .terminal-text {
+            color: #00ff66;
+            font-family: monospace;
+            margin-top: 0.5rem;
             font-size: 1.1rem;
         }
-        .container {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
+
+        .social-links {
+            margin-top: 1.5rem;
         }
-        section {
-            background-color: #161b22;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border-radius: 8px;
-            border: 1px solid #30363d;
-        }
-        h2 {
-            color: #58a6ff;
-            border-bottom: 1px solid #30363d;
-            padding-bottom: 0.5rem;
-            margin-top: 0;
-        }
-        .project-card {
-            background-color: #21262d;
-            padding: 1.5rem;
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.6rem 1.2rem;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            text-decoration: none;
             border-radius: 6px;
-            margin-top: 1rem;
-            border-left: 4px solid #2088FF;
-        }
-        .project-card h3 {
-            margin: 0 0 0.5rem 0;
-            color: #ffffff;
-        }
-        .tags {
-            font-family: monospace;
-            color: #58a6ff;
             font-size: 0.9rem;
+            transition: all 0.3s ease;
         }
+
+        .social-btn:hover {
+            border-color: var(--accent-glow);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+            transform: translateY(-2px);
+            color: var(--accent-glow);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::after {
+            content: "";
+            flex-grow: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--border-color), transparent);
+        }
+
+        /* Custom Interactive Dashboard Dashboard Cards */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-layout { grid-template-columns: 1fr; }
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: linear-gradient(to bottom, var(--accent-glow), var(--accent-blue));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px) scale(1.01);
+            border-color: rgba(0, 242, 254, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card h3 {
+            margin: 0 0 1rem 0;
+            color: #fff;
+            font-size: 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin: 0 0 1.5rem 0;
+        }
+
+        /* Tech Badges styling */
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            font-size: 0.8rem;
+            background-color: rgba(30, 41, 59, 0.7);
+            border: 1px solid var(--border-color);
+            padding: 4px 10px;
+            border-radius: 4px;
+            color: #38bdf8;
+            font-family: monospace;
+        }
+
+        /* Experience Interactive Blocks */
+        .about-box {
+            background: linear-gradient(135deg, rgba(17, 26, 46, 0.8), rgba(10, 15, 29, 0.8));
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .pulse-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: #00ff66;
+            border-radius: 50%;
+            margin-right: 8px;
+            box-shadow: 0 0 10px #00ff66;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 102, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 255, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 102, 0); }
+        }
+
         footer {
             text-align: center;
-            padding: 2rem;
-            color: #8b949e;
-            font-size: 0.9rem;
-        }
-        a {
-            color: #58a6ff;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
+            padding: 4rem 2rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+            background-color: rgba(10, 15, 29, 0.5);
         }
     </style>
 </head>
@@ -82,38 +225,64 @@
 
     <header>
         <h1>Timothy Lai Jun Hong</h1>
-        <p>Software Engineering Student @ UUM | Full-Stack Web Developer</p>
-        <p style="margin-top: 10px;">
-            <a href="https://www.linkedin.com/in/timothy-lai-jun-hong-597442118/" target="_blank">LinkedIn</a> | 
-            <a href="mailto:timothylai53@gmail.com">Email</a>
+        <div class="terminal-text"><span class="pulse-indicator"></span>Ready for Internship Deployment_</div>
+        <p style="color: var(--text-muted); margin-top: 1rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+            Software Engineering Student @ Universiti Utara Malaysia. Engineering responsive systems, automated architecture, and cloud deployment pipelines.
         </p>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/timothy-lai-jun-hong-597442118/" target="_blank" class="social-btn">
+                <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            <a href="mailto:timothylai53@gmail.com" class="social-btn">
+                <i class="fas fa-envelope"></i> Email Developer
+            </a>
+        </div>
     </header>
 
     <div class="container">
+        
         <section id="about">
-            <h2>👨‍💻 About Me</h2>
-            <p>I am a dedicated Software Engineering student pursuing my Bachelor of Science with Honours (Information Technology) at Universiti Utara Malaysia. I specialize in designing robust full-stack architectures, integrating secure RESTful APIs, and implementing continuous delivery deployment workflows.</p>
+            <div class="section-title"><i class="fas fa-terminal" style="color: var(--accent-glow);"></i> System Overview</div>
+            <div class="about-box">
+                <p style="margin: 0;">
+                    Core competencies focused inside full-stack development framework paradigms. Actively preparing for an intense 6-month software engineering structural apprenticeship commencing September 2026. Specialized in managing clean data flows between frontend layouts and robust cloud-hosted microservices.
+                </p>
+            </div>
         </section>
 
         <section id="projects">
-            <h2>🚀 Featured Projects</h2>
+            <div class="section-title"><i class="fas fa-code-branch" style="color: var(--accent-glow);"></i> Active Deployments</div>
             
-            <div class="project-card">
-                <h3>🍽️ Web-Based Catering Management System</h3>
-                <p>Architected an integrated full-stack web application hosted on cloud infrastructure to automate multi-tenant ordering processes, dynamic menus, and client communications.</p>
-                <span class="tags">Vue.js • Node.js • MongoDB • Cloud Deployment</span>
-            </div>
+            <div class="grid-layout">
+                <div class="card">
+                    <h3>Catering Management System <i class="fas fa-utensils" style="color: var(--text-muted); font-size: 1rem;"></i></h3>
+                    <p>Architected an integrated multi-tenant application ecosystem featuring automated execution configurations to streamline dynamic order structures and business workflows.</p>
+                    <div class="tech-tags">
+                        <span class="tag">Vue.js</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">MongoDB</span>
+                        <span class="tag">DigitalOcean</span>
+                    </div>
+                </div>
 
-            <div class="project-card">
-                <h3>🎤 Web-Based Conference Management System</h3>
-                <p>Engineered a single-page event platform backed by microservices, featuring end-to-end testing protocols and automated delivery pipelines.</p>
-                <span class="tags">Angular • Spring Boot • Jenkins • Playwright</span>
+                <div class="card">
+                    <h3>Conference Platform <i class="fas fa-users" style="color: var(--text-muted); font-size: 1rem;"></i></h3>
+                    <p>Engineered a dynamic configuration event portal integrated with secure object handlers, comprehensive automated E2E testing protocols, and complete CI/CD automation pipelines.</p>
+                    <div class="tech-tags">
+                        <span class="tag">Angular</span>
+                        <span class="tag">Spring Boot</span>
+                        <span class="tag">Jenkins CI/CD</span>
+                        <span class="tag">Playwright</span>
+                    </div>
+                </div>
             </div>
         </section>
+
     </div>
 
     <footer>
-        <p>© 2026 Timothy Lai. Built completely with HTML/CSS.</p>
+        <p>// Designed to execute smoothly across modern tech environments.</p>
+        <p style="margin-top: 5px; opacity: 0.5;">© 2026 Timothy Lai • Universiti Utara Malaysia</p>
     </footer>
 
 </body>
