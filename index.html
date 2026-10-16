@@ -3,1038 +3,484 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Timothy Lai | Software Engineer</title>
+<meta name="description" content="Timothy Lai, software engineering student at Universiti Utara Malaysia. Full-stack web applications with Angular, Vue, Spring Boot and Node.js.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
-    --bg:#050816;
-    --card:#0f172a;
-    --text:#f8fafc;
-    --muted:#94a3b8;
-    --border:rgba(255,255,255,.08);
-    --accent:#7c3aed;
-    --accent2:#3b82f6;
-    --violet:#a78bfa;
-    --blue:#60a5fa;
+    --paper:#F3F5F7;
+    --surface:#FFFFFF;
+    --ink:#132033;
+    --muted:#506074;
+    --rule:#D3DAE2;
+    --signal:#1D5BFF;
+    --signal-soft:#E4EBFF;
+    --ok:#178A4C;
+    --sans:'IBM Plex Sans',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --wrap:1120px;
+    --gutter:clamp(16px,4vw,40px);
+}
+@media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+        --paper:#0E1621;--surface:#152131;--ink:#E6EDF5;--muted:#93A3B6;
+        --rule:#26364A;--signal:#7DA2FF;--signal-soft:#1B2B4A;--ok:#4CC28A;
+    }
+}
+:root[data-theme="dark"]{
+    --paper:#0E1621;--surface:#152131;--ink:#E6EDF5;--muted:#93A3B6;
+    --rule:#26364A;--signal:#7DA2FF;--signal-soft:#1B2B4A;--ok:#4CC28A;
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
-
-html{scroll-behavior:smooth}
-
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{
-    font-family:'Inter',sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    overflow-x:hidden;
+    font-family:var(--sans);
+    font-size:1.0625rem;
+    line-height:1.6;
+    background:var(--paper);
+    color:var(--ink);
 }
+a{color:inherit}
+:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:2px}
+::selection{background:var(--signal);color:#fff}
 
-::selection{background:var(--accent);color:#fff}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gutter)}
 
-.container{width:min(1200px,90%);margin:auto}
+/* ── Header ── */
+.site-header{
+    position:sticky;top:0;z-index:10;
+    background:color-mix(in srgb,var(--paper) 88%,transparent);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--rule);
+}
+.site-header .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
+.brand{font-weight:600;text-decoration:none;white-space:nowrap}
+.site-nav{display:flex;gap:4px}
+.site-nav a{
+    text-decoration:none;color:var(--muted);
+    padding:6px 10px;border-radius:6px;font-size:.95rem;
+}
+.site-nav a:hover{color:var(--ink);background:var(--surface)}
 
-/* ───────── BACKGROUND LAYERS ───────── */
-
-#particles{
-    position:fixed;inset:0;
-    z-index:-2;
+/* ── Hero ── */
+.hero{padding:clamp(64px,12vw,140px) 0 clamp(56px,9vw,104px)}
+.status{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:.95rem;color:var(--muted);margin-bottom:28px;
 }
-
-.aurora{
-    position:fixed;inset:0;
-    z-index:-3;
-    pointer-events:none;
-    background:var(--bg);
-    overflow:hidden;
-}
-.aurora span{
-    position:absolute;
-    border-radius:50%;
-    filter:blur(90px);
-    opacity:.45;
-    animation:float 18s ease-in-out infinite alternate;
-}
-.aurora span:nth-child(1){width:520px;height:520px;background:var(--accent);top:-180px;left:20%}
-.aurora span:nth-child(2){width:420px;height:420px;background:var(--accent2);top:30%;right:-140px;animation-delay:-6s;opacity:.3}
-.aurora span:nth-child(3){width:380px;height:380px;background:#db2777;bottom:-160px;left:-120px;animation-delay:-12s;opacity:.18}
-
-@keyframes float{
-    0%{transform:translate(0,0) scale(1)}
-    50%{transform:translate(60px,40px) scale(1.1)}
-    100%{transform:translate(-40px,80px) scale(.95)}
-}
-
-/* cursor glow */
-.cursor-glow{
-    position:fixed;
-    top:0;left:0;
-    width:420px;height:420px;
-    margin:-210px 0 0 -210px;
-    border-radius:50%;
-    background:radial-gradient(circle,rgba(124,58,237,.18),transparent 65%);
-    pointer-events:none;
-    z-index:-1;
-    will-change:transform;
-}
-.cursor-dot{
-    position:fixed;top:0;left:0;
-    width:8px;height:8px;margin:-4px 0 0 -4px;
-    border-radius:50%;
-    background:#fff;
-    pointer-events:none;
-    z-index:1000;
-    mix-blend-mode:difference;
-    transition:width .2s,height .2s,margin .2s;
-}
-.cursor-dot.big{width:44px;height:44px;margin:-22px 0 0 -22px}
-
-/* scroll progress */
-.progress{
-    position:fixed;top:0;left:0;
-    height:3px;width:100%;
-    transform-origin:left;
-    transform:scaleX(0);
-    background:linear-gradient(90deg,var(--accent),var(--blue));
-    z-index:200;
-}
-
-/* ───────── NAVBAR ───────── */
-
-header{
-    position:fixed;top:0;left:0;right:0;
-    z-index:100;
-    transition:background .3s,border-color .3s,backdrop-filter .3s;
-    border-bottom:1px solid transparent;
-}
-header.scrolled{
-    background:rgba(5,8,22,.7);
-    backdrop-filter:blur(16px);
-    -webkit-backdrop-filter:blur(16px);
-    border-color:var(--border);
-}
-
-nav{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:22px 0;
-}
-
-.logo{
-    font-weight:800;
-    font-size:1.2rem;
-    text-decoration:none;
-    color:var(--text);
-}
-.logo::after{
-    content:"_";
-    color:var(--violet);
-    animation:blink 1s steps(1) infinite;
-}
-@keyframes blink{50%{opacity:0}}
-
-.nav-links{display:flex;gap:8px}
-
-.nav-links a{
-    position:relative;
-    text-decoration:none;
-    color:var(--muted);
-    padding:8px 14px;
-    border-radius:10px;
-    transition:color .3s,background .3s;
-}
-.nav-links a:hover{color:#fff;background:rgba(255,255,255,.05)}
-.nav-links a.active{color:#fff}
-.nav-links a.active::after{
-    content:"";
-    position:absolute;
-    left:14px;right:14px;bottom:2px;
-    height:2px;border-radius:2px;
-    background:linear-gradient(90deg,var(--accent),var(--blue));
-}
-
-.menu-btn{
-    display:none;
-    background:none;border:1px solid var(--border);
-    color:#fff;
-    width:42px;height:42px;
-    border-radius:12px;
-    font-size:1.1rem;
-    cursor:pointer;
-}
-
-/* ───────── HERO ───────── */
-
-.hero{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    position:relative;
-    padding-top:100px;
-}
-
-.badge{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    padding:10px 16px;
-    border:1px solid var(--border);
-    border-radius:999px;
-    background:rgba(255,255,255,.03);
-    backdrop-filter:blur(10px);
-    color:#cbd5e1;
-    margin-bottom:30px;
-}
-.badge::before{
-    content:"";
-    width:8px;height:8px;
-    border-radius:50%;
-    background:#22c55e;
-    box-shadow:0 0 0 0 rgba(34,197,94,.7);
-    animation:pulse 2s infinite;
-}
-@keyframes pulse{
-    70%{box-shadow:0 0 0 10px rgba(34,197,94,0)}
-    100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}
-}
-
+.status::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ok)}
 .hero h1{
-    font-size:clamp(3rem,8vw,7rem);
-    line-height:.95;
-    letter-spacing:-4px;
-    font-weight:900;
-    max-width:950px;
+    font-size:clamp(2.4rem,5.6vw,4.4rem);
+    line-height:1.08;
+    font-weight:500;
+    letter-spacing:-.025em;
+    max-width:17ch;
 }
-
-.hero h1 .word{
-    display:inline-block;
-    opacity:0;
-    transform:translateY(40px) rotate(4deg);
-    filter:blur(8px);
-    animation:wordIn .9s cubic-bezier(.2,.8,.2,1) forwards;
-    animation-delay:calc(var(--i) * 80ms + 200ms);
-}
-@keyframes wordIn{to{opacity:1;transform:none;filter:none}}
-
-.gradient{
-    background:linear-gradient(90deg,#ffffff,var(--violet),var(--blue),var(--violet),#ffffff);
-    background-size:300% 100%;
-    -webkit-background-clip:text;
-    background-clip:text;
-    -webkit-text-fill-color:transparent;
-    animation:shine 8s linear infinite;
-}
-@keyframes shine{to{background-position:300% 0}}
-
-.hero p{
-    margin-top:30px;
-    max-width:650px;
+.hero .lead{
+    margin-top:28px;
+    max-width:58ch;
     font-size:1.2rem;
-    line-height:1.8;
     color:var(--muted);
 }
-
-.hero-buttons{
-    margin-top:40px;
-    display:flex;
-    gap:16px;
-    flex-wrap:wrap;
-}
-
-.fade-up{
-    opacity:0;
-    transform:translateY(24px);
-    animation:fadeUp .9s cubic-bezier(.2,.8,.2,1) forwards;
-    animation-delay:var(--d,0s);
-}
-@keyframes fadeUp{to{opacity:1;transform:none}}
-
-.scroll-hint{
-    position:absolute;
-    bottom:40px;left:50%;
-    transform:translateX(-50%);
-    width:26px;height:42px;
-    border:2px solid rgba(255,255,255,.25);
-    border-radius:14px;
-}
-.scroll-hint::after{
-    content:"";
-    position:absolute;
-    top:8px;left:50%;
-    width:4px;height:8px;margin-left:-2px;
-    border-radius:2px;
-    background:#fff;
-    animation:scrollDot 1.8s ease-in-out infinite;
-}
-@keyframes scrollDot{
-    0%{opacity:0;transform:translateY(0)}
-    30%{opacity:1}
-    100%{opacity:0;transform:translateY(14px)}
-}
-
-/* ───────── BUTTONS ───────── */
-
+.actions{margin-top:36px;display:flex;flex-wrap:wrap;gap:12px}
 .btn{
-    position:relative;
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    padding:14px 24px;
-    border-radius:14px;
-    text-decoration:none;
-    font-weight:600;
-    overflow:hidden;
-    transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .3s,background .3s;
+    display:inline-flex;align-items:center;gap:8px;
+    padding:11px 18px;border-radius:6px;
+    font:inherit;font-size:1rem;font-weight:500;
+    text-decoration:none;cursor:pointer;
+    border:1px solid var(--rule);background:var(--surface);color:var(--ink);
+    transition:border-color .15s,background .15s;
 }
-.btn-primary{
-    background:#fff;
-    color:#000;
+.btn:hover{border-color:var(--ink)}
+.btn.primary{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.btn.primary:hover{background:var(--signal);border-color:var(--signal);color:#fff}
+.btn svg{width:18px;height:18px;flex:none}
+
+/* ── Sections: label column + content column ── */
+.section{border-top:1px solid var(--rule);padding:clamp(56px,8vw,96px) 0}
+.section .wrap{display:grid;grid-template-columns:200px 1fr;gap:clamp(24px,4vw,56px)}
+.section-label{
+    font-size:1rem;font-weight:600;
+    position:sticky;top:92px;align-self:start;
 }
-.btn-primary:hover{box-shadow:0 10px 40px -10px rgba(167,139,250,.8)}
-.btn-primary::before{
-    content:"";
-    position:absolute;inset:0;
-    background:linear-gradient(120deg,transparent 30%,rgba(124,58,237,.25),transparent 70%);
-    transform:translateX(-100%);
-    transition:transform .6s;
+.section-label span{display:block;font-weight:400;color:var(--muted);font-size:.95rem;margin-top:4px}
+
+/* ── Projects ── */
+.project{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,48px);align-items:start}
+.project + .project{margin-top:clamp(56px,8vw,88px);padding-top:clamp(56px,8vw,88px);border-top:1px dashed var(--rule)}
+.project h3{font-size:1.5rem;font-weight:500;letter-spacing:-.01em;line-height:1.25}
+.project .summary{margin-top:12px;color:var(--muted)}
+.project ul{margin-top:20px;list-style:none;display:grid;gap:10px}
+.project li{padding-left:20px;position:relative}
+.project li::before{
+    content:"";position:absolute;left:2px;top:.72em;
+    width:8px;height:1.5px;background:var(--signal);
 }
-.btn-primary:hover::before{transform:translateX(100%)}
-
-.btn-secondary{
-    border:1px solid var(--border);
-    color:#fff;
-    background:rgba(255,255,255,.02);
+.stack-line{margin-top:22px;display:flex;flex-wrap:wrap;gap:6px}
+.stack-line span{
+    font-family:var(--mono);font-size:.82rem;
+    padding:3px 8px;border-radius:4px;
+    background:var(--signal-soft);color:var(--ink);
 }
-.btn-secondary:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.2)}
+.project-links{margin-top:22px;display:flex;gap:20px;flex-wrap:wrap}
+.project-links a{font-weight:500;color:var(--signal);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+.project-links a:hover{text-decoration-thickness:2px}
 
-.btn i{transition:transform .3s}
-.btn:hover i{transform:translateX(4px)}
-
-/* ───────── SECTIONS ───────── */
-
-section{padding:120px 0}
-
-.eyebrow{
-    font-family:'JetBrains Mono',monospace;
-    font-size:.85rem;
-    color:var(--violet);
-    margin-bottom:12px;
-    letter-spacing:1px;
-}
-
-.section-title{
-    font-size:clamp(2rem,4vw,2.8rem);
-    margin-bottom:20px;
-    font-weight:800;
-    letter-spacing:-1px;
-}
-
-.section-subtitle{
-    color:var(--muted);
-    max-width:700px;
-    line-height:1.8;
-    margin-bottom:50px;
-}
-
-/* scroll reveal */
-.reveal{
-    opacity:0;
-    transform:translateY(40px);
-    transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1);
-    transition-delay:var(--d,0s);
-}
-.reveal.in{opacity:1;transform:none}
-
-/* spotlight glass card (mouse-following glow) */
-.spot{
-    position:relative;
-    background:rgba(255,255,255,.03);
-    border:1px solid var(--border);
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
+.figure{
+    background:var(--surface);
+    border:1px solid var(--rule);
+    border-radius:8px;
     overflow:hidden;
 }
-.spot::before{
-    content:"";
-    position:absolute;inset:0;
-    background:radial-gradient(500px circle at var(--mx,50%) var(--my,50%),rgba(167,139,250,.14),transparent 40%);
-    opacity:0;
-    transition:opacity .4s;
-    pointer-events:none;
+.figure-tabs{display:flex;border-bottom:1px solid var(--rule)}
+.figure-tabs button{
+    font:inherit;font-size:.9rem;
+    padding:10px 16px;background:none;border:0;cursor:pointer;
+    color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;
 }
-.spot:hover::before{opacity:1}
+.figure-tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--signal)}
+.figure-tabs button:hover{color:var(--ink)}
+.panel{padding:clamp(12px,2.4vw,24px)}
+.panel[hidden]{display:none}
+.panel img{display:block;width:100%;height:auto;border-radius:4px;border:1px solid var(--rule)}
+.panel figcaption{margin-top:12px;font-size:.9rem;color:var(--muted)}
 
-/* ───────── ABOUT ───────── */
+/* architecture diagrams */
+.arch{display:block;width:100%;height:auto}
+.arch .node rect{fill:var(--surface);stroke:var(--ink);stroke-width:1.25}
+.arch .node.store rect{fill:var(--signal-soft)}
+.arch .node.mod rect{stroke:var(--rule);stroke-width:1.25}
+.arch .node.ci rect{stroke-dasharray:4 3;stroke:var(--muted)}
+.arch text{fill:var(--ink);font-family:var(--mono);font-size:13px}
+.arch text.sub{fill:var(--muted);font-size:11px}
+.arch text.edge-label{fill:var(--muted);font-size:10.5px}
+.arch .edge{fill:none;stroke:var(--signal);stroke-width:1.5}
+.arch .edge.soft{stroke:var(--muted);stroke-dasharray:3 3}
+.arch .arrow{fill:var(--signal)}
+.arch .arrow.soft{fill:var(--muted)}
+.arch .lane{fill:none;stroke:var(--rule);stroke-dasharray:2 4}
 
-.about-card{
-    padding:clamp(28px,5vw,48px);
-    border-radius:28px;
-}
-.about-card p{
-    color:var(--muted);
-    line-height:1.9;
-    font-size:1.05rem;
-}
-.about-card p + p{margin-top:18px}
+/* the one orchestrated moment: request path draws in when the diagram scrolls into view */
+.js .arch .edge.draw{stroke-dasharray:1;stroke-dashoffset:1}
+.js .arch.drawn .edge.draw{transition:stroke-dashoffset .7s cubic-bezier(.4,0,.2,1);transition-delay:var(--t,0s);stroke-dashoffset:0}
+.js .arch .arrow,.js .arch .edge-label{opacity:0;transition:opacity .3s}
+.js .arch.drawn .arrow,.js .arch.drawn .edge-label{opacity:1;transition-delay:calc(var(--t,0s) + .55s)}
 
-/* ───────── PROJECTS ───────── */
+/* ── Stack ── */
+.stack{display:grid;gap:0}
+.stack-row{
+    display:grid;grid-template-columns:160px 1fr;gap:16px;
+    padding:16px 0;border-bottom:1px solid var(--rule);
+}
+.stack-row:first-child{padding-top:0}
+.stack-row dt{color:var(--muted)}
+.stack-row dd{font-family:var(--mono);font-size:.95rem;display:flex;flex-wrap:wrap;gap:6px 18px}
 
-.projects-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(min(350px,100%),1fr));
-    gap:30px;
-}
+/* ── About ── */
+.about p{max-width:64ch}
+.about p + p{margin-top:18px}
+.facts{margin-top:32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px;max-width:720px}
+.facts dt{font-size:.9rem;color:var(--muted)}
+.facts dd{margin-top:4px;font-weight:500}
 
-.project-card{
-    height:100%;
-    border-radius:28px;
-    transform-style:preserve-3d;
-    transition:transform .5s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .5s;
+/* ── Contact ── */
+.contact h2{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:500;letter-spacing:-.02em;line-height:1.15;max-width:22ch}
+.contact .mail{
+    display:inline-block;margin-top:24px;
+    font-family:var(--mono);font-size:clamp(1rem,2.6vw,1.35rem);
+    color:var(--signal);text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1px;
+    word-break:break-all;
 }
-.project-card:hover{
-    border-color:rgba(167,139,250,.35);
-    box-shadow:0 30px 60px -20px rgba(124,58,237,.45);
-}
-.project-card.tilting{transition:transform .1s linear,border-color .3s,box-shadow .5s}
+.contact .actions{margin-top:28px}
 
-.project-image{
-    position:relative;
-    height:220px;
-    background:linear-gradient(135deg,rgba(124,58,237,.4),rgba(59,130,246,.4));
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:4rem;
-    overflow:hidden;
-}
-.project-image img{
-    width:100%;height:100%;
-    object-fit:cover;
-    object-position:center;
-    transition:transform .8s cubic-bezier(.2,.8,.2,1);
-}
-.project-card:hover .project-image img{transform:scale(1.08)}
-.project-image::after{
-    content:"";
-    position:absolute;inset:0;
-    background:linear-gradient(to top,rgba(5,8,22,.6),transparent 60%);
-}
+footer{border-top:1px solid var(--rule);padding:28px 0;color:var(--muted);font-size:.9rem}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
-.project-content{padding:30px}
-.project-content h3{
-    margin-bottom:12px;
-    font-size:1.3rem;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
+/* ── Responsive ── */
+@media (max-width:1100px){
+    .project{grid-template-columns:1fr}
+    .project .figure{max-width:640px}
 }
-.project-content h3 i{
-    font-size:.9rem;
-    color:var(--muted);
-    transition:transform .3s,color .3s;
+@media (max-width:900px){
+    .section .wrap{grid-template-columns:1fr}
+    .section-label{position:static}
 }
-.project-card:hover h3 i{transform:translate(4px,-4px);color:var(--violet)}
-.project-content p{color:var(--muted);line-height:1.7}
-
-.tags{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}
-.tag{
-    padding:8px 12px;
-    background:rgba(255,255,255,.05);
-    border:1px solid transparent;
-    border-radius:999px;
-    font-size:.85rem;
-    transition:border-color .3s,background .3s,transform .3s;
+@media (max-width:560px){
+    .site-nav a:not(.keep){display:none}
+    .stack-row{grid-template-columns:1fr;gap:6px}
 }
-.tag:hover{
-    border-color:rgba(167,139,250,.5);
-    background:rgba(124,58,237,.15);
-    transform:translateY(-2px);
-}
-
-/* ───────── SKILLS ───────── */
-
-.skills{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(110px,1fr));
-    gap:16px;
-}
-
-.skill{
-    border-radius:20px;
-    padding:22px 10px 16px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:12px;
-    font-size:.85rem;
-    color:var(--muted);
-    transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s,color .3s;
-}
-.skill img{
-    width:48px;height:48px;
-    transition:transform .45s cubic-bezier(.3,1.6,.5,1);
-}
-.skill:hover{
-    transform:translateY(-6px);
-    border-color:rgba(167,139,250,.35);
-    color:#fff;
-}
-.skill:hover img{transform:scale(1.18) rotate(-8deg)}
-
-/* ───────── CONTACT ───────── */
-
-.contact-wrap{
-    position:relative;
-    border-radius:32px;
-    padding:2px;
-    overflow:hidden;
-}
-.contact-wrap::before{
-    content:"";
-    position:absolute;
-    inset:-50%;
-    background:conic-gradient(from 0deg,transparent 0 60%,var(--accent),var(--blue),transparent 90%);
-    animation:spin 6s linear infinite;
-}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-.contact-card{
-    position:relative;
-    text-align:center;
-    padding:clamp(36px,7vw,72px) clamp(20px,5vw,60px);
-    border-radius:30px;
-    background:rgba(8,11,28,.92);
-}
-.contact-card h2{
-    font-size:clamp(2rem,5vw,3rem);
-    margin-bottom:20px;
-    letter-spacing:-1px;
-}
-.contact-card p{color:var(--muted);margin-bottom:30px}
-
-.socials{
-    display:flex;
-    justify-content:center;
-    gap:14px;
-    margin-top:30px;
-}
-.socials a{
-    width:48px;height:48px;
-    display:grid;place-items:center;
-    border-radius:14px;
-    border:1px solid var(--border);
-    color:#fff;
-    font-size:1.2rem;
-    transition:transform .3s,background .3s,border-color .3s;
-}
-.socials a:hover{
-    transform:translateY(-4px);
-    background:rgba(124,58,237,.2);
-    border-color:rgba(167,139,250,.5);
-}
-
-/* ───────── FOOTER ───────── */
-
-footer{
-    padding:40px 0;
-    text-align:center;
-    color:var(--muted);
-    border-top:1px solid var(--border);
-}
-
-.to-top{
-    position:fixed;
-    right:24px;bottom:24px;
-    width:48px;height:48px;
-    border-radius:14px;
-    border:1px solid var(--border);
-    background:rgba(15,23,42,.8);
-    backdrop-filter:blur(10px);
-    color:#fff;
-    cursor:pointer;
-    opacity:0;
-    transform:translateY(20px);
-    pointer-events:none;
-    transition:opacity .3s,transform .3s,background .3s;
-    z-index:90;
-}
-.to-top.show{opacity:1;transform:none;pointer-events:auto}
-.to-top:hover{background:var(--accent)}
-
-/* ───────── RESPONSIVE ───────── */
-
-@media(max-width:768px){
-    .hero h1{letter-spacing:-2px}
-    .menu-btn{display:block}
-    .nav-links{
-        position:absolute;
-        top:100%;left:5%;right:5%;
-        flex-direction:column;
-        padding:12px;
-        border-radius:18px;
-        background:rgba(15,23,42,.95);
-        backdrop-filter:blur(16px);
-        border:1px solid var(--border);
-        opacity:0;
-        transform:translateY(-10px);
-        pointer-events:none;
-        transition:opacity .3s,transform .3s;
-    }
-    .nav-links.open{opacity:1;transform:none;pointer-events:auto}
-    .nav-links a{padding:14px}
-    .scroll-hint{display:none}
-    section{padding:90px 0}
-}
-
-@media (pointer:coarse){
-    .cursor-glow,.cursor-dot{display:none}
-}
-
 @media (prefers-reduced-motion:reduce){
-    *,*::before,*::after{animation-duration:.001s !important;animation-iteration-count:1 !important;transition-duration:.001s !important}
     html{scroll-behavior:auto}
-    .reveal{opacity:1;transform:none}
+    .js .arch .edge.draw{stroke-dashoffset:0;transition:none}
+    .js .arch .arrow,.js .arch .edge-label{opacity:1;transition:none}
 }
 </style>
 </head>
 <body>
+<script>document.documentElement.classList.add('js')</script>
 
-<!-- background layers -->
-<div class="aurora"><span></span><span></span><span></span></div>
-<canvas id="particles"></canvas>
-<div class="cursor-glow"></div>
-<div class="cursor-dot"></div>
-<div class="progress"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-mail" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.75" d="M3 6h18v12H3z M3 7l9 6 9-6"/></symbol>
+  <symbol id="i-in" viewBox="0 0 24 24"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.96 1.33-1.96 2.7V21h-4z"/></symbol>
+  <symbol id="i-gh" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.75c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.75" d="M6 3h8l4 4v14H6z M14 3v4h4 M9 12h6 M9 16h6"/></symbol>
+</svg>
 
-<header>
-<div class="container">
-<nav>
-
-<a href="#" class="logo">Timothy Lai</a>
-
-<button class="menu-btn" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
-
-<div class="nav-links">
-<a href="#about">About</a>
-<a href="#projects">Projects</a>
-<a href="#skills">Skills</a>
-<a href="#contact">Contact</a>
-</div>
-
-</nav>
-</div>
+<header class="site-header">
+  <div class="wrap">
+    <a href="#top" class="brand">Timothy Lai</a>
+    <nav class="site-nav" aria-label="Sections">
+      <a href="#projects" class="keep">Projects</a>
+      <a href="#stack">Stack</a>
+      <a href="#about">About</a>
+      <a href="#contact" class="keep">Contact</a>
+    </nav>
+  </div>
 </header>
 
-<div class="container">
+<main id="top">
 
 <section class="hero">
-
-<div>
-
-<div class="badge fade-up" style="--d:.1s">
-Available for Internship • Sept 2026
-</div>
-
-<h1>
-<span class="word" style="--i:0">Building</span>
-<span class="word" style="--i:1">software</span>
-<span class="word" style="--i:2">that</span>
-<span class="word" style="--i:3">feels</span>
-<span class="word gradient" style="--i:4">simple,</span>
-<span class="word gradient" style="--i:5">fast</span>
-<span class="word gradient" style="--i:6">&amp;</span>
-<span class="word gradient" style="--i:7">useful.</span>
-</h1>
-
-<p class="fade-up" style="--d:1s">
-I'm Timothy Lai, a Software Engineering student at
-Universiti Utara Malaysia. I enjoy building modern web
-applications, solving real-world problems, and creating
-digital experiences that people genuinely enjoy using.
-</p>
-
-<div class="hero-buttons fade-up" style="--d:1.2s">
-
-<a href="#projects" class="btn btn-primary magnetic">
-View Projects <i class="fas fa-arrow-right"></i>
-</a>
-
-<a href="https://www.linkedin.com/in/timothy-lai-jun-hong-597442118/"
-target="_blank"
-class="btn btn-secondary magnetic">
-<i class="fab fa-linkedin"></i> LinkedIn
-</a>
-
-</div>
-
-</div>
-
-<a href="#about" class="scroll-hint" aria-label="Scroll down"></a>
-
+  <div class="wrap">
+    <!-- Update this line whenever your availability changes -->
+    <p class="status">Looking for a software engineering internship</p>
+    <h1>I build web applications end to end: interface, API and database.</h1>
+    <p class="lead">
+      I'm Timothy Lai, a software engineering student at Universiti Utara Malaysia.
+      Most of my work is full-stack: Angular or Vue on the front end, Spring Boot
+      or Node.js behind it, and MySQL or MongoDB underneath.
+    </p>
+    <div class="actions">
+      <a class="btn primary" href="#projects">See my projects</a>
+      <a class="btn" href="https://www.linkedin.com/in/timothy-lai-jun-hong-597442118/" target="_blank" rel="noopener">
+        <svg aria-hidden="true"><use href="#i-in"/></svg>LinkedIn
+      </a>
+      <!-- TODO: replace YOUR-USERNAME with your GitHub username -->
+      <a class="btn" href="https://github.com/YOUR-USERNAME" target="_blank" rel="noopener">
+        <svg aria-hidden="true"><use href="#i-gh"/></svg>GitHub
+      </a>
+    </div>
+  </div>
 </section>
 
-<section id="about">
+<section class="section" id="projects">
+  <div class="wrap">
+    <h2 class="section-label">Projects<span>How each one is built</span></h2>
 
-<div class="eyebrow reveal">01 / about</div>
+    <div>
+      <!-- ── Project 1 ── -->
+      <article class="project">
+        <div>
+          <h3>Catering management system</h3>
+          <p class="summary">
+            A web platform that lets a catering business manage orders, customer
+            records and event schedules in one place.
+          </p>
+          <!-- TODO: rewrite these with what YOU did (your role, a hard problem you solved, a number if you have one) -->
+          <ul>
+            <li>Order workflow from enquiry to confirmed booking</li>
+            <li>Customer records with order history</li>
+            <li>Scheduling view for upcoming events</li>
+            <li>REST API consumed by a Vue.js single-page app</li>
+          </ul>
+          <div class="stack-line"><span>Vue.js</span><span>Node.js</span><span>MongoDB</span><span>REST</span></div>
+          <!-- TODO: add real links, or delete the ones you don't have -->
+          <div class="project-links">
+            <a href="#" target="_blank" rel="noopener">Source code</a>
+            <a href="#" target="_blank" rel="noopener">Live demo</a>
+          </div>
+        </div>
 
-<h2 class="section-title reveal">
-About Me
-</h2>
+        <figure class="figure" data-tabs>
+          <div class="figure-tabs" role="tablist">
+            <button role="tab" aria-selected="true" data-panel="0">Architecture</button>
+            <button role="tab" aria-selected="false" data-panel="1">Screenshot</button>
+          </div>
+          <div class="panel" role="tabpanel">
+            <svg class="arch" viewBox="0 0 560 300" role="img" aria-label="Vue.js browser app calls a Node.js REST API, which reads and writes MongoDB. The API is split into orders, customers and scheduling modules.">
+              <defs>
+                <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrow" d="M0 0L10 5L0 10z"/></marker>
+              </defs>
+              <g class="node"><rect x="16" y="40" width="148" height="64" rx="6"/><text x="32" y="68">Browser</text><text class="sub" x="32" y="88">Vue.js SPA</text></g>
+              <g class="node"><rect x="206" y="40" width="148" height="64" rx="6"/><text x="222" y="68">REST API</text><text class="sub" x="222" y="88">Node.js</text></g>
+              <g class="node store"><rect x="396" y="40" width="148" height="64" rx="6"/><text x="412" y="68">MongoDB</text><text class="sub" x="412" y="88">documents</text></g>
 
-<p class="section-subtitle reveal" style="--d:.1s">
-A passionate Software Engineering student focused on
-full-stack development, web technologies, and creating
-clean, user-friendly digital products.
-</p>
+              <path class="edge draw" pathLength="1" d="M164 72H204" marker-end="url(#a1)" style="--t:0s"/>
+              <text class="edge-label" x="168" y="62" style="--t:0s">JSON</text>
+              <path class="edge draw" pathLength="1" d="M354 72H394" marker-end="url(#a1)" style="--t:.35s"/>
 
-<div class="about-card spot reveal" style="--d:.2s">
+              <rect class="lane" x="186" y="140" width="358" height="136" rx="6"/>
+              <text class="sub" x="200" y="162">API modules</text>
+              <g class="node mod"><rect x="200" y="176" width="104" height="44" rx="5"/><text x="214" y="203">orders</text></g>
+              <g class="node mod"><rect x="314" y="176" width="104" height="44" rx="5"/><text x="328" y="203">customers</text></g>
+              <g class="node mod"><rect x="428" y="176" width="104" height="44" rx="5"/><text x="442" y="203">schedule</text></g>
+              <path class="edge draw" pathLength="1" d="M280 104V138" style="--t:.7s"/>
+              <text class="sub" x="200" y="252">One router per module; each owns its collection</text>
+            </svg>
+            <figcaption>Request path: browser to API to database.</figcaption>
+          </div>
+          <div class="panel" role="tabpanel" hidden>
+            <img src="caterflowss.jpg" alt="Screenshot of the catering management system dashboard" loading="lazy" data-shot>
+          </div>
+        </figure>
+      </article>
 
-<p>
-Currently pursuing Software Engineering at Universiti
-Utara Malaysia. I enjoy transforming ideas into practical
-software solutions and continuously learning modern
-development technologies.
-</p>
+      <!-- ── Project 2 ── -->
+      <article class="project">
+        <div>
+          <h3>Conference management platform</h3>
+          <p class="summary">
+            A web application for running conferences: attendee registration,
+            session scheduling and event administration.
+          </p>
+          <!-- TODO: rewrite these with what YOU did -->
+          <ul>
+            <li>Attendee registration and account management</li>
+            <li>Session and speaker scheduling</li>
+            <li>Spring Boot REST API backed by MySQL</li>
+            <li>CI/CD pipeline that builds, tests and deploys on every push</li>
+          </ul>
+          <div class="stack-line"><span>Angular</span><span>Spring Boot</span><span>MySQL</span><span>CI/CD</span></div>
+          <div class="project-links">
+            <a href="#" target="_blank" rel="noopener">Source code</a>
+            <a href="#" target="_blank" rel="noopener">Live demo</a>
+          </div>
+        </div>
 
-<p>
-I'm actively seeking a Software Engineering Internship
-beginning September 2026 where I can contribute,
-learn from experienced engineers, and further develop
-my technical and professional skills.
-</p>
+        <figure class="figure" data-tabs>
+          <div class="figure-tabs" role="tablist">
+            <button role="tab" aria-selected="true" data-panel="0">Architecture</button>
+            <button role="tab" aria-selected="false" data-panel="1">Screenshot</button>
+          </div>
+          <div class="panel" role="tabpanel">
+            <svg class="arch" viewBox="0 0 560 300" role="img" aria-label="Angular client calls a Spring Boot REST API backed by MySQL. A CI/CD pipeline builds, tests and deploys the API on each push.">
+              <defs>
+                <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrow" d="M0 0L10 5L0 10z"/></marker>
+                <marker id="a2s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrow soft" d="M0 0L10 5L0 10z"/></marker>
+              </defs>
+              <g class="node"><rect x="16" y="40" width="148" height="64" rx="6"/><text x="32" y="68">Client</text><text class="sub" x="32" y="88">Angular</text></g>
+              <g class="node"><rect x="206" y="40" width="148" height="64" rx="6"/><text x="222" y="68">REST API</text><text class="sub" x="222" y="88">Spring Boot</text></g>
+              <g class="node store"><rect x="396" y="40" width="148" height="64" rx="6"/><text x="412" y="68">MySQL</text><text class="sub" x="412" y="88">relational</text></g>
 
-</div>
+              <path class="edge draw" pathLength="1" d="M164 72H204" marker-end="url(#a2)" style="--t:0s"/>
+              <text class="edge-label" x="168" y="62" style="--t:0s">JSON</text>
+              <path class="edge draw" pathLength="1" d="M354 72H394" marker-end="url(#a2)" style="--t:.35s"/>
+              <text class="edge-label" x="360" y="62" style="--t:.35s">JPA</text>
 
+              <rect class="lane" x="16" y="160" width="528" height="116" rx="6"/>
+              <text class="sub" x="30" y="182">CI/CD pipeline</text>
+              <g class="node ci"><rect x="30" y="196" width="140" height="48" rx="5"/><text x="46" y="225">git push</text></g>
+              <g class="node ci"><rect x="210" y="196" width="140" height="48" rx="5"/><text x="226" y="225">build + test</text></g>
+              <g class="node ci"><rect x="390" y="196" width="140" height="48" rx="5"/><text x="406" y="225">deploy</text></g>
+              <path class="edge soft" d="M170 220H208" marker-end="url(#a2s)"/>
+              <path class="edge soft" d="M350 220H388" marker-end="url(#a2s)"/>
+              <path class="edge soft" d="M460 196V150H280V106" marker-end="url(#a2s)"/>
+            </svg>
+            <figcaption>Request path on top; delivery pipeline below.</figcaption>
+          </div>
+          <div class="panel" role="tabpanel" hidden>
+            <img src="conss.jpg" alt="Screenshot of the conference management platform" loading="lazy" data-shot>
+          </div>
+        </figure>
+      </article>
+    </div>
+  </div>
 </section>
 
-<section id="projects">
-
-<div class="eyebrow reveal">02 / work</div>
-
-<h2 class="section-title reveal">
-Featured Projects
-</h2>
-
-<p class="section-subtitle reveal" style="--d:.1s">
-A selection of projects that showcase my development
-experience and technical skills.
-</p>
-
-<div class="projects-grid">
-
-<div class="reveal" style="--d:.1s">
-<div class="project-card spot tilt">
-
-<div class="project-image">
-<img src="caterflowss.jpg" alt="Catering Management System Screenshot" onerror="this.replaceWith('🍽️')">
-</div>
-
-<div class="project-content">
-
-<h3>Catering Management System <i class="fas fa-arrow-up-right-from-square"></i></h3>
-
-<p>
-A complete catering management platform for handling
-orders, customer records, scheduling and business
-operations efficiently.
-</p>
-
-<div class="tags">
-<span class="tag">Vue.js</span>
-<span class="tag">Node.js</span>
-<span class="tag">MongoDB</span>
-<span class="tag">REST API</span>
-</div>
-
-</div>
-
-</div>
-</div>
-
-<div class="reveal" style="--d:.25s">
-<div class="project-card spot tilt">
-
-<div class="project-image">
-<img src="conss.jpg" alt="Conference Management Platform Screenshot" onerror="this.replaceWith('🎤')">
-</div>
-
-<div class="project-content">
-
-<h3>Conference Management Platform <i class="fas fa-arrow-up-right-from-square"></i></h3>
-
-<p>
-A web application that streamlines conference event
-management, attendee registration and scheduling
-workflows.
-</p>
-
-<div class="tags">
-<span class="tag">Angular</span>
-<span class="tag">Spring Boot</span>
-<span class="tag">MySQL</span>
-<span class="tag">CI/CD</span>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-
+<section class="section" id="stack">
+  <div class="wrap">
+    <h2 class="section-label">Stack<span>Tools I use in projects</span></h2>
+    <dl class="stack">
+      <div class="stack-row"><dt>Languages</dt><dd><span>Java</span><span>TypeScript</span><span>JavaScript</span><span>PHP</span><span>HTML</span><span>CSS</span></dd></div>
+      <div class="stack-row"><dt>Front end</dt><dd><span>Angular</span><span>Vue.js</span></dd></div>
+      <div class="stack-row"><dt>Back end</dt><dd><span>Spring Boot</span><span>Node.js</span><span>REST APIs</span></dd></div>
+      <div class="stack-row"><dt>Databases</dt><dd><span>MySQL</span><span>MongoDB</span></dd></div>
+      <div class="stack-row"><dt>DevOps</dt><dd><span>Git</span><span>GitHub</span><span>Docker</span><span>Jenkins</span></dd></div>
+      <div class="stack-row"><dt>Design and testing</dt><dd><span>Figma</span><span>Postman</span></dd></div>
+    </dl>
+  </div>
 </section>
 
-<section id="skills">
-
-<div class="eyebrow reveal">03 / stack</div>
-
-<h2 class="section-title reveal">
-Tech Stack
-</h2>
-
-<p class="section-subtitle reveal" style="--d:.1s">
-Technologies and tools I frequently use.
-</p>
-
-<div class="skills" id="skillGrid"></div>
-
+<section class="section about" id="about">
+  <div class="wrap">
+    <h2 class="section-label">About</h2>
+    <div>
+      <p>
+        I'm studying software engineering at Universiti Utara Malaysia. I like the
+        whole path a feature takes, from the database schema to the screen someone
+        clicks on, and I'm most at home building business web applications.
+      </p>
+      <p>
+        I'm looking for an internship where I can ship real features on a team,
+        get my code reviewed by experienced engineers, and learn how production
+        systems are run.
+      </p>
+      <dl class="facts">
+        <div><dt>University</dt><dd>Universiti Utara Malaysia</dd></div>
+        <div><dt>Programme</dt><dd>B.Sc. Software Engineering</dd></div>
+        <div><dt>Location</dt><dd>Malaysia</dd></div>
+      </dl>
+    </div>
+  </div>
 </section>
 
-<section id="contact">
-
-<div class="contact-wrap reveal">
-<div class="contact-card">
-
-<h2>Let's Build <span class="gradient">Something Great</span></h2>
-
-<p>
-Open to internship opportunities, collaborations,
-and exciting software projects.
-</p>
-
-<a href="mailto:timothylai53@gmail.com"
-class="btn btn-primary magnetic">
-Contact Me <i class="fas fa-paper-plane"></i>
-</a>
-
-<div class="socials">
-
-<a href="mailto:timothylai53@gmail.com" aria-label="Email">
-<i class="fas fa-envelope"></i>
-</a>
-
-<a href="https://www.linkedin.com/in/timothy-lai-jun-hong-597442118/"
-target="_blank" aria-label="LinkedIn">
-<i class="fab fa-linkedin"></i>
-</a>
-
-<a href="#" aria-label="GitHub">
-<i class="fab fa-github"></i>
-</a>
-
-</div>
-
-</div>
-</div>
-
+<section class="section contact" id="contact">
+  <div class="wrap">
+    <h2 class="section-label">Contact</h2>
+    <div>
+      <h2>Hiring an intern? I'd like to hear about the role.</h2>
+      <a class="mail" href="mailto:timothylai53@gmail.com">timothylai53@gmail.com</a>
+      <div class="actions">
+        <a class="btn primary" href="mailto:timothylai53@gmail.com"><svg aria-hidden="true"><use href="#i-mail"/></svg>Email me</a>
+        <!-- TODO: put resume.pdf next to this file, or delete this button -->
+        <a class="btn" href="resume.pdf" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-doc"/></svg>Download résumé</a>
+        <a class="btn" href="https://www.linkedin.com/in/timothy-lai-jun-hong-597442118/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-in"/></svg>LinkedIn</a>
+        <a class="btn" href="https://github.com/YOUR-USERNAME" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-gh"/></svg>GitHub</a>
+      </div>
+    </div>
+  </div>
 </section>
 
-</div>
+</main>
 
 <footer>
-© 2026 Timothy Lai Jun Hong • Software Engineer Portfolio
+  <div class="wrap">
+    <span>© 2026 Timothy Lai Jun Hong</span>
+    <span>Hand-written HTML and CSS</span>
+  </div>
 </footer>
-
-<button class="to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
 
 <script>
 (() => {
-const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const finePointer = matchMedia('(pointer: fine)').matches;
-
-/* ── Skills grid (same 18 icons as before, now individual tiles) ── */
-const skills = [
-    ['java','Java'],['js','JavaScript'],['ts','TypeScript'],['php','PHP'],
-    ['html','HTML'],['css','CSS'],['spring','Spring'],['angular','Angular'],
-    ['vue','Vue'],['nodejs','Node.js'],['mongodb','MongoDB'],['mysql','MySQL'],
-    ['docker','Docker'],['jenkins','Jenkins'],['git','Git'],['github','GitHub'],
-    ['postman','Postman'],['figma','Figma']
-];
-const grid = document.getElementById('skillGrid');
-skills.forEach(([id, name], i) => {
-    const el = document.createElement('div');
-    el.className = 'skill spot reveal';
-    el.style.setProperty('--d', (i * 0.04) + 's');
-    el.innerHTML = `<img src="https://skillicons.dev/icons?i=${id}" alt="${name}" loading="lazy"><span>${name}</span>`;
-    grid.appendChild(el);
-});
-
-/* ── Scroll reveal ── */
-const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-    });
-}, { threshold: 0.15 });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-/* ── Navbar: blur on scroll, progress bar, back-to-top ── */
-const header = document.querySelector('header');
-const progress = document.querySelector('.progress');
-const toTop = document.querySelector('.to-top');
-const onScroll = () => {
-    const y = scrollY;
-    const max = document.documentElement.scrollHeight - innerHeight;
-    header.classList.toggle('scrolled', y > 20);
-    progress.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
-    toTop.classList.toggle('show', y > 600);
-};
-addEventListener('scroll', onScroll, { passive: true });
-onScroll();
-toTop.addEventListener('click', () => scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }));
-
-/* ── Active nav link ── */
-const links = document.querySelectorAll('.nav-links a');
-const navIO = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-        if (e.isIntersecting) {
-            links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
-        }
-    });
-}, { rootMargin: '-50% 0px -50% 0px' });
-document.querySelectorAll('section[id]').forEach(s => navIO.observe(s));
-
-/* ── Mobile menu ── */
-const menuBtn = document.querySelector('.menu-btn');
-const navLinks = document.querySelector('.nav-links');
-menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
-links.forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
-
-/* ── Spotlight glow follows the mouse on cards ── */
-document.addEventListener('pointermove', e => {
-    const card = e.target.closest('.spot');
-    if (!card) return;
-    const r = card.getBoundingClientRect();
-    card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-    card.style.setProperty('--my', (e.clientY - r.top) + 'px');
-});
-
-if (finePointer && !reduce) {
-
-    /* ── 3D tilt on project cards ── */
-    document.querySelectorAll('.tilt').forEach(card => {
-        card.addEventListener('pointermove', e => {
-            const r = card.getBoundingClientRect();
-            const x = (e.clientX - r.left) / r.width - 0.5;
-            const y = (e.clientY - r.top) / r.height - 0.5;
-            card.classList.add('tilting');
-            card.style.transform = `perspective(1000px) rotateX(${-y * 10}deg) rotateY(${x * 10}deg) translateY(-8px)`;
-        });
-        card.addEventListener('pointerleave', () => {
-            card.classList.remove('tilting');
-            card.style.transform = '';
-        });
-    });
-
-    /* ── Magnetic buttons ── */
-    document.querySelectorAll('.magnetic').forEach(btn => {
-        btn.addEventListener('pointermove', e => {
-            const r = btn.getBoundingClientRect();
-            const x = e.clientX - r.left - r.width / 2;
-            const y = e.clientY - r.top - r.height / 2;
-            btn.style.transform = `translate(${x * 0.25}px, ${y * 0.35}px)`;
-        });
-        btn.addEventListener('pointerleave', () => btn.style.transform = '');
-    });
-
-    /* ── Custom cursor + glow ── */
-    const glow = document.querySelector('.cursor-glow');
-    const dot = document.querySelector('.cursor-dot');
-    let mx = innerWidth / 2, my = innerHeight / 2, gx = mx, gy = my;
-    addEventListener('pointermove', e => {
-        mx = e.clientX; my = e.clientY;
-        dot.style.transform = `translate(${mx}px, ${my}px)`;
-    });
-    document.querySelectorAll('a, button, .skill, .tag').forEach(el => {
-        el.addEventListener('pointerenter', () => dot.classList.add('big'));
-        el.addEventListener('pointerleave', () => dot.classList.remove('big'));
-    });
-    (function follow() {
-        gx += (mx - gx) * 0.08;
-        gy += (my - gy) * 0.08;
-        glow.style.transform = `translate(${gx}px, ${gy}px)`;
-        requestAnimationFrame(follow);
-    })();
-} else {
-    document.querySelector('.cursor-dot').style.display = 'none';
-}
-
-/* ── Interactive particle network ── */
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-let W, H, pts = [];
-const mouse = { x: -9999, y: -9999 };
-
-function resize() {
-    const dpr = Math.min(devicePixelRatio || 1, 2);
-    W = innerWidth; H = innerHeight;
-    canvas.width = W * dpr; canvas.height = H * dpr;
-    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const n = Math.min(90, Math.floor(W * H / 16000));
-    pts = Array.from({ length: n }, () => ({
-        x: Math.random() * W, y: Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35,
-        r: Math.random() * 1.6 + 0.6
+  // Architecture / Screenshot tabs
+  document.querySelectorAll('[data-tabs]').forEach(fig => {
+    const tabs = fig.querySelectorAll('[role="tab"]');
+    const panels = fig.querySelectorAll('[role="tabpanel"]');
+    tabs.forEach(tab => tab.addEventListener('click', () => {
+      tabs.forEach(t => t.setAttribute('aria-selected', t === tab));
+      panels.forEach((p, i) => p.hidden = String(i) !== tab.dataset.panel);
     }));
-}
+    // No screenshot file yet? Hide the tab instead of showing a broken image.
+    // (Probe with a separate Image: the real one sits in a hidden panel and never loads.)
+    const probe = new Image();
+    probe.onerror = () => { tabs[1].remove(); panels[1].remove(); };
+    probe.src = fig.querySelector('[data-shot]').getAttribute('src');
+  });
 
-function draw() {
-    ctx.clearRect(0, 0, W, H);
-    for (let i = 0; i < pts.length; i++) {
-        const p = pts[i];
-        if (!reduce) {
-            p.x += p.vx; p.y += p.vy;
-            if (p.x < 0 || p.x > W) p.vx *= -1;
-            if (p.y < 0 || p.y > H) p.vy *= -1;
-
-            // gently push particles away from the cursor
-            const dx = p.x - mouse.x, dy = p.y - mouse.y, d = Math.hypot(dx, dy);
-            if (d < 150) {
-                p.x += dx / d * 0.8; p.y += dy / d * 0.8;
-                ctx.strokeStyle = `rgba(167,139,250,${0.5 * (1 - d / 150)})`;
-                ctx.lineWidth = 0.8;
-                ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
-            }
-        }
-        for (let j = i + 1; j < pts.length; j++) {
-            const q = pts[j];
-            const ex = p.x - q.x, ey = p.y - q.y, e2 = ex * ex + ey * ey;
-            if (e2 < 14000) {
-                ctx.strokeStyle = `rgba(96,165,250,${0.16 * (1 - e2 / 14000)})`;
-                ctx.lineWidth = 0.6;
-                ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
-            }
-        }
-        ctx.fillStyle = 'rgba(203,213,225,.65)';
-        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
-    }
-    if (!reduce) requestAnimationFrame(draw);
-}
-
-addEventListener('resize', () => { resize(); if (reduce) draw(); });
-addEventListener('pointermove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
-document.addEventListener('pointerleave', () => { mouse.x = mouse.y = -9999; });
-resize();
-draw();
+  // Draw each request path once when its diagram scrolls into view
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('drawn'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('.arch').forEach(svg => io.observe(svg));
 })();
 </script>
-
 </body>
 </html>
