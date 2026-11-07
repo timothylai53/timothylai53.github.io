@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Timothy Lai | Software Engineer</title>
-<meta name="description" content="Timothy Lai, software engineering student at Universiti Utara Malaysia. Full-stack web applications with Angular, Vue, Spring Boot and Node.js.">
+<meta name="description" content="Timothy Lai, software engineering student at Universiti Utara Malaysia and software engineer intern. Full-stack web applications with Vue, React, Angular, Spring Boot, Node.js and FastAPI.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -249,20 +249,20 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 <section class="hero">
   <div class="wrap">
     <!-- Update this line whenever your availability changes -->
-    <p class="status">Looking for a software engineering internship</p>
+    <p class="status">Software engineer intern · Sept 2026 – Mar 2027</p>
     <h1>I build web applications end to end: interface, API and database.</h1>
     <p class="lead">
       I'm Timothy Lai, a software engineering student at Universiti Utara Malaysia.
-      Most of my work is full-stack: Angular or Vue on the front end, Spring Boot
-      or Node.js behind it, and MySQL or MongoDB underneath.
+      Most of my work is full-stack: Vue, React or Angular on the front end,
+      Spring Boot, Node.js or FastAPI behind it, and MySQL, MongoDB or PostgreSQL
+      underneath.
     </p>
     <div class="actions">
       <a class="btn primary" href="#projects">See my projects</a>
       <a class="btn" href="https://www.linkedin.com/in/timothy-lai-jun-hong-597442118/" target="_blank" rel="noopener">
         <svg aria-hidden="true"><use href="#i-in"/></svg>LinkedIn
       </a>
-      <!-- TODO: replace YOUR-USERNAME with your GitHub username -->
-      <a class="btn" href="https://github.com/YOUR-USERNAME" target="_blank" rel="noopener">
+      <a class="btn" href="https://github.com/timothylai53" target="_blank" rel="noopener">
         <svg aria-hidden="true"><use href="#i-gh"/></svg>GitHub
       </a>
     </div>
@@ -274,26 +274,72 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <h2 class="section-label">Projects<span>How each one is built</span></h2>
 
     <div>
+      <!-- ── Project 0: internship ── -->
+      <article class="project">
+        <div>
+          <h3>Vulnerability management reporting dashboard</h3>
+          <p class="summary">
+            My internship project. It replaces monthly vulnerability-management
+            reports that were built by hand in Excel with a web dashboard.
+          </p>
+          <ul>
+            <li>Upload raw monthly datasets, then validate them and run them through SLA, priority and remediation business rules</li>
+            <li>Reports on screen with the same default filters as the manual reports, plus drill-downs and month-to-month trends</li>
+            <li>Excel export built from the original report templates, so PivotTables still refresh in Excel</li>
+            <li>The same rules also ship as command-line scripts for people who want the workbook without the web app</li>
+          </ul>
+          <div class="stack-line"><span>Python</span><span>FastAPI</span><span>pandas</span><span>PostgreSQL</span><span>React</span><span>TypeScript</span></div>
+          <div class="project-links">
+            <span style="color:var(--muted)">Private repository · internship work</span>
+          </div>
+        </div>
+
+        <figure class="figure">
+          <div class="panel">
+            <svg class="arch" viewBox="0 0 560 300" role="img" aria-label="A React browser app uploads datasets to a FastAPI backend. The backend validates them, applies business rules and stores each reporting month in PostgreSQL, then returns report JSON and Excel workbooks.">
+              <defs>
+                <marker id="a0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrow" d="M0 0L10 5L0 10z"/></marker>
+              </defs>
+              <g class="node"><rect x="16" y="40" width="148" height="64" rx="6"/><text x="32" y="68">Browser</text><text class="sub" x="32" y="88">React + TS</text></g>
+              <g class="node"><rect x="206" y="40" width="148" height="64" rx="6"/><text x="222" y="68">API</text><text class="sub" x="222" y="88">FastAPI + pandas</text></g>
+              <g class="node store"><rect x="396" y="40" width="148" height="64" rx="6"/><text x="412" y="68">PostgreSQL</text><text class="sub" x="412" y="88">one run per month</text></g>
+
+              <path class="edge draw" pathLength="1" d="M164 72H204" marker-end="url(#a0)" style="--t:0s"/>
+              <text class="edge-label" x="168" y="62" style="--t:0s">.xlsx</text>
+              <path class="edge draw" pathLength="1" d="M354 72H394" marker-end="url(#a0)" style="--t:.35s"/>
+
+              <rect class="lane" x="16" y="140" width="528" height="136" rx="6"/>
+              <text class="sub" x="30" y="162">Processing pipeline</text>
+              <g class="node mod"><rect x="30" y="176" width="150" height="44" rx="5"/><text x="44" y="203">validate</text></g>
+              <g class="node mod"><rect x="205" y="176" width="150" height="44" rx="5"/><text x="219" y="203">business rules</text></g>
+              <g class="node mod"><rect x="380" y="176" width="150" height="44" rx="5"/><text x="394" y="203">report + export</text></g>
+              <path class="edge draw" pathLength="1" d="M280 104V174" style="--t:.7s"/>
+              <text class="sub" x="30" y="252">SLA · priority · remediation · Excel templates</text>
+            </svg>
+            <figcaption>Upload in, reports and Excel workbooks out. All demo data is synthetic.</figcaption>
+          </div>
+        </figure>
+      </article>
+
       <!-- ── Project 1 ── -->
       <article class="project">
         <div>
-          <h3>Catering management system</h3>
+          <h3>CaterFlow: catering management system</h3>
           <p class="summary">
-            A web platform that lets a catering business manage orders, customer
-            records and event schedules in one place.
+            My Final Year Project. It's a marketplace where customers book caterers,
+            caterers run their business from a dashboard, and a super admin
+            approves who can sell.
           </p>
-          <!-- TODO: rewrite these with what YOU did (your role, a hard problem you solved, a number if you have one) -->
           <ul>
-            <li>Order workflow from enquiry to confirmed booking</li>
-            <li>Customer records with order history</li>
-            <li>Scheduling view for upcoming events</li>
-            <li>REST API consumed by a Vue.js single-page app</li>
+            <li>Three roles (customer, catering provider, super admin) with JWT auth and route guards; providers need admin approval of their F&amp;B licence before they can sell</li>
+            <li>Package customisation with live pricing by guest count, then checkout with Stripe or a quotation request</li>
+            <li>Provider tools for menus, orders, quotations, events, kitchen inventory, logistics and sales reports</li>
+            <li>CaterFlow AI, a Gemini-powered assistant that recommends caterers by budget, guest count and location</li>
+            <li>Customer–provider chat with file uploads, plus SendGrid emails for orders and password resets</li>
           </ul>
-          <div class="stack-line"><span>Vue.js</span><span>Node.js</span><span>MongoDB</span><span>REST</span></div>
-          <!-- TODO: add real links, or delete the ones you don't have -->
+          <div class="stack-line"><span>Vue 3</span><span>Pinia</span><span>Node.js</span><span>Express</span><span>MongoDB</span><span>Stripe</span><span>Gemini</span></div>
           <div class="project-links">
-            <a href="#" target="_blank" rel="noopener">Source code</a>
-            <a href="#" target="_blank" rel="noopener">Live demo</a>
+            <a href="https://github.com/timothylai53/Web-CMS" target="_blank" rel="noopener">Source code</a>
           </div>
         </div>
 
@@ -303,12 +349,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
             <button role="tab" aria-selected="false" data-panel="1">Screenshot</button>
           </div>
           <div class="panel" role="tabpanel">
-            <svg class="arch" viewBox="0 0 560 300" role="img" aria-label="Vue.js browser app calls a Node.js REST API, which reads and writes MongoDB. The API is split into orders, customers and scheduling modules.">
+            <svg class="arch" viewBox="0 0 560 300" role="img" aria-label="Vue.js browser app calls a Node.js and Express REST API, which reads and writes MongoDB. The API is split into auth, order and AI modules and calls Stripe, SendGrid and Gemini.">
               <defs>
                 <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrow" d="M0 0L10 5L0 10z"/></marker>
               </defs>
               <g class="node"><rect x="16" y="40" width="148" height="64" rx="6"/><text x="32" y="68">Browser</text><text class="sub" x="32" y="88">Vue.js SPA</text></g>
-              <g class="node"><rect x="206" y="40" width="148" height="64" rx="6"/><text x="222" y="68">REST API</text><text class="sub" x="222" y="88">Node.js</text></g>
+              <g class="node"><rect x="206" y="40" width="148" height="64" rx="6"/><text x="222" y="68">REST API</text><text class="sub" x="222" y="88">Node.js + Express</text></g>
               <g class="node store"><rect x="396" y="40" width="148" height="64" rx="6"/><text x="412" y="68">MongoDB</text><text class="sub" x="412" y="88">documents</text></g>
 
               <path class="edge draw" pathLength="1" d="M164 72H204" marker-end="url(#a1)" style="--t:0s"/>
@@ -317,16 +363,16 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
               <rect class="lane" x="186" y="140" width="358" height="136" rx="6"/>
               <text class="sub" x="200" y="162">API modules</text>
-              <g class="node mod"><rect x="200" y="176" width="104" height="44" rx="5"/><text x="214" y="203">orders</text></g>
-              <g class="node mod"><rect x="314" y="176" width="104" height="44" rx="5"/><text x="328" y="203">customers</text></g>
-              <g class="node mod"><rect x="428" y="176" width="104" height="44" rx="5"/><text x="442" y="203">schedule</text></g>
+              <g class="node mod"><rect x="200" y="176" width="104" height="44" rx="5"/><text x="214" y="203">auth</text></g>
+              <g class="node mod"><rect x="314" y="176" width="104" height="44" rx="5"/><text x="328" y="203">orders</text></g>
+              <g class="node mod"><rect x="428" y="176" width="104" height="44" rx="5"/><text x="442" y="203">ai</text></g>
               <path class="edge draw" pathLength="1" d="M280 104V138" style="--t:.7s"/>
-              <text class="sub" x="200" y="252">One router per module; each owns its collection</text>
+              <text class="sub" x="200" y="252">Stripe · SendGrid · Gemini</text>
             </svg>
-            <figcaption>Request path: browser to API to database.</figcaption>
+            <figcaption>Request path: browser to API to database. External services sit behind the API.</figcaption>
           </div>
           <div class="panel" role="tabpanel" hidden>
-            <img src="caterflowss.jpg" alt="Screenshot of the catering management system dashboard" loading="lazy" data-shot>
+            <img src="caterflowss.jpg" alt="Screenshot of the CaterFlow catering management system" loading="lazy" data-shot>
           </div>
         </figure>
       </article>
@@ -334,22 +380,22 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <!-- ── Project 2 ── -->
       <article class="project">
         <div>
-          <h3>Conference management platform</h3>
+          <h3>ScholarSync: conference management platform</h3>
           <p class="summary">
-            A web application for running conferences: attendee registration,
-            session scheduling and event administration.
+            An academic conference system built by a team of 8. I was the team lead.
+            It covers the full cycle from paper submission to the final schedule.
           </p>
-          <!-- TODO: rewrite these with what YOU did -->
           <ul>
-            <li>Attendee registration and account management</li>
-            <li>Session and speaker scheduling</li>
-            <li>Spring Boot REST API backed by MySQL</li>
-            <li>CI/CD pipeline that builds, tests and deploys on every push</li>
+            <li>Roles for author, reviewer, chair and admin: paper submission, reviewer assignment, scoring against criteria, rebuttals and decisions</li>
+            <li>Conference tracks, sessions, rooms and schedule, plus paid registration</li>
+            <li>Spring Boot REST API with 27 resources, backed by MySQL through JPA</li>
+            <li>A Jenkins pipeline that builds the stack, runs Playwright end-to-end tests and pushes versioned Docker images</li>
+            <li>Was deployed with Docker Compose on a DigitalOcean droplet</li>
           </ul>
-          <div class="stack-line"><span>Angular</span><span>Spring Boot</span><span>MySQL</span><span>CI/CD</span></div>
+          <div class="stack-line"><span>Angular</span><span>Spring Boot</span><span>MySQL</span><span>Docker</span><span>Jenkins</span><span>Playwright</span></div>
           <div class="project-links">
-            <a href="#" target="_blank" rel="noopener">Source code</a>
-            <a href="#" target="_blank" rel="noopener">Live demo</a>
+            <a href="https://github.com/timothylai53/Web-Conference-Management-System" target="_blank" rel="noopener">Source code</a>
+            <a href="https://youtu.be/k4AKBp7g1rQ" target="_blank" rel="noopener">Video walkthrough</a>
           </div>
         </div>
 
@@ -359,7 +405,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
             <button role="tab" aria-selected="false" data-panel="1">Screenshot</button>
           </div>
           <div class="panel" role="tabpanel">
-            <svg class="arch" viewBox="0 0 560 300" role="img" aria-label="Angular client calls a Spring Boot REST API backed by MySQL. A CI/CD pipeline builds, tests and deploys the API on each push.">
+            <svg class="arch" viewBox="0 0 560 300" role="img" aria-label="Angular client calls a Spring Boot REST API backed by MySQL. A Jenkins pipeline builds, runs Playwright tests and pushes Docker images on each push.">
               <defs>
                 <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrow" d="M0 0L10 5L0 10z"/></marker>
                 <marker id="a2s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrow soft" d="M0 0L10 5L0 10z"/></marker>
@@ -374,10 +420,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
               <text class="edge-label" x="360" y="62" style="--t:.35s">JPA</text>
 
               <rect class="lane" x="16" y="160" width="528" height="116" rx="6"/>
-              <text class="sub" x="30" y="182">CI/CD pipeline</text>
+              <text class="sub" x="30" y="182">Jenkins pipeline</text>
               <g class="node ci"><rect x="30" y="196" width="140" height="48" rx="5"/><text x="46" y="225">git push</text></g>
-              <g class="node ci"><rect x="210" y="196" width="140" height="48" rx="5"/><text x="226" y="225">build + test</text></g>
-              <g class="node ci"><rect x="390" y="196" width="140" height="48" rx="5"/><text x="406" y="225">deploy</text></g>
+              <g class="node ci"><rect x="210" y="196" width="140" height="48" rx="5"/><text x="226" y="225">build + e2e</text></g>
+              <g class="node ci"><rect x="390" y="196" width="140" height="48" rx="5"/><text x="406" y="225">docker push</text></g>
               <path class="edge soft" d="M170 220H208" marker-end="url(#a2s)"/>
               <path class="edge soft" d="M350 220H388" marker-end="url(#a2s)"/>
               <path class="edge soft" d="M460 196V150H280V106" marker-end="url(#a2s)"/>
@@ -385,9 +431,19 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
             <figcaption>Request path on top; delivery pipeline below.</figcaption>
           </div>
           <div class="panel" role="tabpanel" hidden>
-            <img src="conss.jpg" alt="Screenshot of the conference management platform" loading="lazy" data-shot>
+            <img src="conss.jpg" alt="Screenshot of the ScholarSync conference management platform" loading="lazy" data-shot>
           </div>
         </figure>
+      </article>
+
+      <article class="project">
+        <div>
+          <h3>More projects</h3>
+          <ul>
+            <li><a href="https://github.com/timothylai53/REAL-TIME-STOCK-MANAGEMENT-SYSTEM" target="_blank" rel="noopener">Real-time stock management</a>: a multi-threaded Java client–server inventory system with lock ordering to avoid deadlock, ReentrantLock, parallel streams and a concurrent stress test</li>
+            <li><a href="https://github.com/timothylai53/Campus-Food-Review" target="_blank" rel="noopener">Campus food review</a>: a PHP and MySQL app where students post, search, like and comment on meal reviews with photos</li>
+          </ul>
+        </div>
       </article>
     </div>
   </div>
@@ -397,12 +453,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <div class="wrap">
     <h2 class="section-label">Stack<span>Tools I use in projects</span></h2>
     <dl class="stack">
-      <div class="stack-row"><dt>Languages</dt><dd><span>Java</span><span>TypeScript</span><span>JavaScript</span><span>PHP</span><span>HTML</span><span>CSS</span></dd></div>
-      <div class="stack-row"><dt>Front end</dt><dd><span>Angular</span><span>Vue.js</span></dd></div>
-      <div class="stack-row"><dt>Back end</dt><dd><span>Spring Boot</span><span>Node.js</span><span>REST APIs</span></dd></div>
-      <div class="stack-row"><dt>Databases</dt><dd><span>MySQL</span><span>MongoDB</span></dd></div>
+      <div class="stack-row"><dt>Languages</dt><dd><span>Java</span><span>Python</span><span>TypeScript</span><span>JavaScript</span><span>PHP</span><span>HTML</span><span>CSS</span></dd></div>
+      <div class="stack-row"><dt>Front end</dt><dd><span>Vue.js</span><span>React</span><span>Angular</span></dd></div>
+      <div class="stack-row"><dt>Back end</dt><dd><span>Spring Boot</span><span>Node.js / Express</span><span>FastAPI</span><span>pandas</span><span>REST APIs</span></dd></div>
+      <div class="stack-row"><dt>Databases</dt><dd><span>MySQL</span><span>PostgreSQL</span><span>MongoDB</span></dd></div>
       <div class="stack-row"><dt>DevOps</dt><dd><span>Git</span><span>GitHub</span><span>Docker</span><span>Jenkins</span></dd></div>
-      <div class="stack-row"><dt>Design and testing</dt><dd><span>Figma</span><span>Postman</span></dd></div>
+      <div class="stack-row"><dt>Design and testing</dt><dd><span>Figma</span><span>Postman</span><span>Playwright</span><span>pytest</span></dd></div>
     </dl>
   </div>
 </section>
@@ -417,13 +473,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         clicks on, and I'm most at home building business web applications.
       </p>
       <p>
-        I'm looking for an internship where I can ship real features on a team,
-        get my code reviewed by experienced engineers, and learn how production
-        systems are run.
+        I'm currently a software engineer intern, building an internal reporting
+        dashboard that turns manual Excel work into a web app. Away from the screen
+        I play guitar and drums in a live band.
       </p>
       <dl class="facts">
         <div><dt>University</dt><dd>Universiti Utara Malaysia</dd></div>
         <div><dt>Programme</dt><dd>B.Sc. Software Engineering</dd></div>
+        <div><dt>Currently</dt><dd>Software engineer intern</dd></div>
         <div><dt>Location</dt><dd>Malaysia</dd></div>
       </dl>
     </div>
@@ -434,14 +491,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <div class="wrap">
     <h2 class="section-label">Contact</h2>
     <div>
-      <h2>Hiring an intern? I'd like to hear about the role.</h2>
+      <h2>Want to talk about a project or a role? Send me a message.</h2>
       <a class="mail" href="mailto:timothylai53@gmail.com">timothylai53@gmail.com</a>
       <div class="actions">
         <a class="btn primary" href="mailto:timothylai53@gmail.com"><svg aria-hidden="true"><use href="#i-mail"/></svg>Email me</a>
-        <!-- TODO: put resume.pdf next to this file, or delete this button -->
-        <a class="btn" href="resume.pdf" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-doc"/></svg>Download résumé</a>
+        <a class="btn" href="https://timothylai53.github.io/my-resume-site/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-doc"/></svg>Résumé</a>
         <a class="btn" href="https://www.linkedin.com/in/timothy-lai-jun-hong-597442118/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-in"/></svg>LinkedIn</a>
-        <a class="btn" href="https://github.com/YOUR-USERNAME" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-gh"/></svg>GitHub</a>
+        <a class="btn" href="https://github.com/timothylai53" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-gh"/></svg>GitHub</a>
       </div>
     </div>
   </div>
