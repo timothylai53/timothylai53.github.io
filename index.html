@@ -6,6 +6,14 @@
 <title>Timothy Lai | Software Engineer</title>
 <meta name="description" content="Timothy Lai, software engineering student at Universiti Utara Malaysia (graduating Nov 2027) and software engineer intern. Full-stack web applications with Vue, React, Angular, Spring Boot, Node.js and FastAPI.">
 
+<meta property="og:title" content="Timothy Lai | Software Engineer">
+<meta property="og:description" content="Software engineering student at UUM and software engineer intern. Full-stack web apps: a reporting dashboard that cut a 2-hour job to 5 minutes, a catering marketplace and a conference platform.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://timothylai53.github.io/">
+<meta property="og:image" content="https://timothylai53.github.io/vmdash.jpg">
+<meta name="theme-color" content="#132033">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23132033'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='28' font-weight='700' fill='%23ffffff' text-anchor='middle'%3ETL%3C/text%3E%3C/svg%3E">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -22,7 +30,7 @@
     --ok:#178A4C;
     --sans:'IBM Plex Sans',system-ui,sans-serif;
     --mono:'IBM Plex Mono',ui-monospace,monospace;
-    --wrap:1120px;
+    --wrap:1200px;
     --gutter:clamp(16px,4vw,40px);
 }
 @media (prefers-color-scheme:dark){
@@ -46,6 +54,14 @@ body{
     color:var(--ink);
 }
 a{color:inherit}
+h1,h2,h3{text-wrap:balance}
+p,li{text-wrap:pretty}
+.skip{
+    position:fixed;left:12px;top:-60px;z-index:20;
+    padding:10px 14px;border-radius:6px;background:var(--ink);color:var(--paper);
+    text-decoration:none;font-weight:500;transition:top .15s;
+}
+.skip:focus{top:12px}
 :focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:2px}
 ::selection{background:var(--signal);color:#fff}
 
@@ -66,7 +82,9 @@ a{color:inherit}
     text-decoration:none;color:var(--muted);
     padding:6px 10px;border-radius:6px;font-size:.95rem;
 }
+.site-nav a{transition:color .15s,background .15s}
 .site-nav a:hover{color:var(--ink);background:var(--surface)}
+.site-nav a[aria-current="true"]{color:var(--ink);background:var(--surface);box-shadow:inset 0 -2px 0 var(--signal)}
 
 /* ── Hero ── */
 .hero{padding:clamp(64px,12vw,140px) 0 clamp(56px,9vw,104px)}
@@ -83,8 +101,8 @@ a{color:inherit}
     max-width:17ch;
 }
 .hero .lead{
-    margin-top:28px;
-    max-width:58ch;
+    margin-top:24px;
+    max-width:56ch;
     font-size:1.2rem;
     color:var(--muted);
 }
@@ -95,28 +113,36 @@ a{color:inherit}
     font:inherit;font-size:1rem;font-weight:500;
     text-decoration:none;cursor:pointer;
     border:1px solid var(--rule);background:var(--surface);color:var(--ink);
-    transition:border-color .15s,background .15s;
+    transition:border-color .15s,background .15s,transform .1s;
 }
+.btn:active{transform:translateY(1px) scale(.98)}
 .btn:hover{border-color:var(--ink)}
 .btn.primary{background:var(--ink);border-color:var(--ink);color:var(--paper)}
 .btn.primary:hover{background:var(--signal);border-color:var(--signal);color:#fff}
 .btn svg{width:18px;height:18px;flex:none}
 
-/* ── Sections: label column + content column ── */
-.section{border-top:1px solid var(--rule);padding:clamp(56px,8vw,96px) 0}
-.section .wrap{display:grid;grid-template-columns:200px minmax(0,1fr);gap:clamp(24px,4vw,56px)}
-.section-label{
-    font-size:1rem;font-weight:600;
-    position:sticky;top:92px;align-self:start;
-}
-.section-label span{display:block;font-weight:400;color:var(--muted);font-size:.95rem;margin-top:4px}
+/* ── Sections: heading on top, content full width ── */
+.section{border-top:1px solid var(--rule);padding:clamp(56px,7vw,88px) 0 clamp(64px,8vw,100px)}
+section[id]{scroll-margin-top:72px}
+.section-head{margin-bottom:clamp(28px,4vw,44px)}
+.section-head h2{font-size:clamp(1.6rem,3vw,2.1rem);font-weight:500;letter-spacing:-.02em;line-height:1.15}
+.section-head p{margin-top:6px;color:var(--muted)}
 
 /* ── Projects ── */
-.project{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,48px);align-items:start}
-.project + .project{margin-top:clamp(56px,8vw,88px);padding-top:clamp(56px,8vw,88px);border-top:1px dashed var(--rule)}
-.project h3{font-size:1.5rem;font-weight:500;letter-spacing:-.01em;line-height:1.25}
-.project .summary{margin-top:12px;color:var(--muted)}
-.project ul{margin-top:20px;list-style:none;display:grid;gap:10px}
+.project{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:clamp(28px,4vw,56px);align-items:start}
+.project + .project{margin-top:clamp(48px,7vw,80px);padding-top:clamp(48px,7vw,80px);border-top:1px solid var(--rule)}
+.eyebrow{font-family:var(--mono);font-size:.8rem;letter-spacing:.04em;color:var(--signal);margin-bottom:10px}
+.project h3{font-size:clamp(1.4rem,2.2vw,1.65rem);font-weight:500;letter-spacing:-.015em;line-height:1.2}
+.project .summary{margin-top:10px;color:var(--muted);max-width:52ch}
+.keyfacts{
+    margin-top:22px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+    border:1px solid var(--rule);border-radius:8px;background:var(--surface);
+}
+.keyfacts div{padding:12px 14px}
+.keyfacts div + div{border-left:1px solid var(--rule)}
+.keyfacts dt{font-size:.78rem;color:var(--muted)}
+.keyfacts dd{margin-top:2px;font-weight:600;line-height:1.3}
+.project ul{margin-top:20px;list-style:none;display:grid;gap:8px;max-width:58ch}
 .project li{padding-left:20px;position:relative}
 .project li::before{
     content:"";position:absolute;left:2px;top:.72em;
@@ -131,6 +157,22 @@ a{color:inherit}
 .project-links{margin-top:22px;display:flex;gap:20px;flex-wrap:wrap}
 .project-links a{font-weight:500;color:var(--signal);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
 .project-links a:hover{text-decoration-thickness:2px}
+.project-links .note{color:var(--muted)}
+
+/* More projects: compact cards */
+.more{margin-top:clamp(48px,7vw,80px);padding-top:clamp(40px,6vw,64px);border-top:1px solid var(--rule)}
+.more h3{font-size:1.15rem;font-weight:600}
+.more-grid{margin-top:18px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.mini{
+    display:block;text-decoration:none;padding:20px;border-radius:8px;
+    border:1px solid var(--rule);background:var(--surface);
+    transition:border-color .15s,transform .15s;
+}
+.mini:hover{border-color:var(--signal);transform:translateY(-2px)}
+.mini h4{font-size:1.05rem;font-weight:600}
+.mini h4 span{color:var(--signal);margin-left:4px}
+.mini p{margin-top:6px;color:var(--muted);font-size:.95rem}
+.mini .stack-line{margin-top:14px}
 
 .figure{
     background:var(--surface);
@@ -201,7 +243,7 @@ a{color:inherit}
 /* ── Stack ── */
 .stack{display:grid;gap:0}
 .stack-row{
-    display:grid;grid-template-columns:160px 1fr;gap:16px;
+    display:grid;grid-template-columns:200px 1fr;gap:16px;
     padding:16px 0;border-bottom:1px solid var(--rule);
 }
 .stack-row:first-child{padding-top:0}
@@ -216,7 +258,8 @@ a{color:inherit}
 .facts dd{margin-top:4px;font-weight:500}
 
 /* ── Contact ── */
-.contact h2{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:500;letter-spacing:-.02em;line-height:1.15;max-width:22ch}
+.contact h2{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:500;letter-spacing:-.02em;line-height:1.15;max-width:24ch}
+.contact .lead{margin-top:12px;color:var(--muted);max-width:52ch}
 .contact .mail{
     display:inline-block;margin-top:24px;
     font-family:var(--mono);font-size:clamp(1rem,2.6vw,1.35rem);
@@ -229,13 +272,16 @@ footer{border-top:1px solid var(--rule);padding:28px 0;color:var(--muted);font-s
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 /* ── Responsive ── */
-@media (max-width:1100px){
-    .project{grid-template-columns:1fr}
-    .project .figure{max-width:640px}
+@media (max-width:960px){
+    .project{grid-template-columns:minmax(0,1fr)}
+    .project .figure{max-width:720px}
 }
-@media (max-width:900px){
-    .section .wrap{grid-template-columns:minmax(0,1fr)}
-    .section-label{position:static}
+@media (max-width:640px){
+    .more-grid{grid-template-columns:minmax(0,1fr)}
+    .keyfacts{grid-template-columns:minmax(0,1fr)}
+    .keyfacts div + div{border-left:0;border-top:1px solid var(--rule)}
+    .keyfacts div{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:10px 14px}
+    .keyfacts dd{margin-top:0;text-align:right}
 }
 @media (max-width:560px){
     .site-nav a:not(.keep){display:none}
@@ -243,12 +289,15 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 }
 @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
+    .btn,.mini,.skip{transition:none}
+    .btn:active,.mini:hover{transform:none}
     .js .arch .edge.draw{stroke-dashoffset:0;transition:none}
     .js .arch .arrow,.js .arch .edge-label{opacity:1;transition:none}
 }
 </style>
 </head>
 <body>
+<a class="skip" href="#projects">Skip to projects</a>
 <script>document.documentElement.classList.add('js')</script>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -278,11 +327,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <p class="status">Software engineer intern · Sept 2026 – Mar 2027</p>
     <h1>I turn manual business processes into web apps.</h1>
     <p class="lead">
-      I'm Timothy Lai, a software engineering student at Universiti Utara Malaysia
-      (graduating Nov 2027). I've built a security reporting dashboard that cut a
-      2-hour job to 5 minutes, a catering booking marketplace, and a conference
-      review platform. I work across the stack: Vue, React or Angular in front;
-      Spring Boot, Node.js or FastAPI behind; MySQL, MongoDB or PostgreSQL underneath.
+      I'm Timothy Lai, a software engineering student at Universiti Utara Malaysia,
+      graduating Nov 2027. My latest build, a security reporting dashboard, cut a
+      2-hour monthly job to 5 minutes. I work across the stack, from the database
+      to the screen.
     </p>
     <div class="actions">
       <a class="btn primary" href="#projects">See my projects</a>
@@ -298,27 +346,31 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 <section class="section" id="projects">
   <div class="wrap">
-    <h2 class="section-label">Projects<span>How each one is built</span></h2>
+    <div class="section-head">
+      <h2>Selected projects</h2>
+      <p>What each one does, my role, and how it's built.</p>
+    </div>
 
     <div>
       <!-- ── Project 0: internship ── -->
       <article class="project">
         <div>
+          <p class="eyebrow">Internship · 2026</p>
           <h3>Vulnerability management reporting dashboard</h3>
-          <p class="summary">
-            My internship project. It replaces monthly vulnerability-management
-            reports that were built by hand in Excel with a web dashboard, and cuts
-            report preparation from <strong>about 2 hours to 5 minutes</strong>.
-          </p>
+          <p class="summary">Replaces monthly vulnerability reports that were built by hand in Excel with a web dashboard.</p>
+          <dl class="keyfacts">
+            <div><dt>Result</dt><dd>2 hrs → 5 min</dd></div>
+            <div><dt>Context</dt><dd>Internship</dd></div>
+            <div><dt>Output</dt><dd>Web + Excel</dd></div>
+          </dl>
           <ul>
-            <li>Upload the raw monthly datasets and the reports generate themselves: validation, then SLA, priority and remediation business rules, all automated</li>
-            <li>Reports on screen with the same default filters as the manual reports, plus drill-downs and month-to-month trends</li>
-            <li>Excel export built from the original report templates, so PivotTables still refresh in Excel</li>
-            <li>The same rules also ship as command-line scripts for people who want the workbook without the web app</li>
+            <li>Upload the month's files; validation and SLA, priority and remediation rules run automatically</li>
+            <li>On-screen reports with filters, drill-downs and month-to-month trends</li>
+            <li>Exports to the original Excel templates, so PivotTables still refresh</li>
           </ul>
           <div class="stack-line"><span>Python</span><span>FastAPI</span><span>pandas</span><span>PostgreSQL</span><span>React</span><span>TypeScript</span></div>
           <div class="project-links">
-            <span style="color:var(--muted)">Private repository · internship work</span>
+            <span class="note">Private repository · internship work</span>
           </div>
         </div>
 
@@ -360,20 +412,20 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <!-- ── Project 1 ── -->
       <article class="project">
         <div>
+          <p class="eyebrow">Final Year Project · Solo</p>
           <h3>CaterFlow: catering management system</h3>
-          <p class="summary">
-            My Final Year Project, which I built solo. It's a marketplace where customers book caterers,
-            caterers run their business from a dashboard, and a super admin
-            approves who can sell.
-          </p>
+          <p class="summary">A marketplace where customers book caterers and caterers run their business from one dashboard.</p>
+          <dl class="keyfacts">
+            <div><dt>Role</dt><dd>Built solo</dd></div>
+            <div><dt>Users</dt><dd>3 roles</dd></div>
+            <div><dt>Payments</dt><dd>Stripe</dd></div>
+          </dl>
           <ul>
-            <li>Three roles (customer, catering provider, super admin) with JWT auth and route guards; providers need admin approval of their F&amp;B licence before they can sell</li>
-            <li>Package customisation with live pricing by guest count, then checkout with Stripe or a quotation request</li>
-            <li>Provider tools for menus, orders, quotations, events, kitchen inventory, logistics and sales reports</li>
-            <li>CaterFlow AI, a Gemini-powered assistant that recommends caterers by budget, guest count and location</li>
-            <li>Customer–provider chat with file uploads, plus SendGrid emails for orders and password resets</li>
+            <li>Customers customise packages with live pricing, then pay or request a quotation</li>
+            <li>Providers manage menus, orders, inventory and sales reports; an admin approves new providers</li>
+            <li>A Gemini-powered assistant recommends caterers by budget, guest count and location</li>
           </ul>
-          <div class="stack-line"><span>Vue 3</span><span>Pinia</span><span>Node.js</span><span>Express</span><span>MongoDB</span><span>Stripe</span><span>Gemini</span></div>
+          <div class="stack-line"><span>Vue 3</span><span>Node.js</span><span>Express</span><span>MongoDB</span><span>Stripe</span><span>Gemini</span></div>
           <div class="project-links">
             <a href="https://github.com/timothylai53/Web-CMS" target="_blank" rel="noopener">Source code</a>
           </div>
@@ -416,19 +468,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <!-- ── Project 2 ── -->
       <article class="project">
         <div>
+          <p class="eyebrow">Team project · Team lead</p>
           <h3>ScholarSync: conference management platform</h3>
-          <p class="summary">
-            An academic conference system built by a team of 8. I led the team.
-            It covers the full cycle from paper submission to the final schedule.
-          </p>
+          <p class="summary">An academic conference system covering everything from paper submission to the final schedule.</p>
+          <dl class="keyfacts">
+            <div><dt>Role</dt><dd>Team lead</dd></div>
+            <div><dt>Team</dt><dd>8 people</dd></div>
+            <div><dt>Delivery</dt><dd>Jenkins CI/CD</dd></div>
+          </dl>
           <ul>
-            <li><strong>My role:</strong> split the work across 8 people, built my own share of the features, and led the frontend build</li>
-            <li>Combined everyone's pages into one Angular app and refined the layout so it looks and behaves consistently</li>
-            <li>Supported a teammate in setting up the Jenkins pipeline and its automated testing</li>
-            <li>Roles for author, reviewer, chair and admin: paper submission, reviewer assignment, scoring against criteria, rebuttals and decisions</li>
-            <li>Conference tracks, sessions, rooms and schedule, plus paid registration</li>
-            <li>Spring Boot REST API with 27 resources, backed by MySQL through JPA</li>
-            <li>A Jenkins pipeline that builds the stack, runs Playwright end-to-end tests and pushes versioned Docker images</li>
+            <li>Split the work across the team and led the Angular frontend build</li>
+            <li>Merged everyone's pages into one consistent app; supported the Jenkins and Playwright test pipeline</li>
+            <li>Submission, review scoring, rebuttals, scheduling and paid registration on a Spring Boot API</li>
           </ul>
           <div class="stack-line"><span>Angular</span><span>Spring Boot</span><span>MySQL</span><span>Docker</span><span>Jenkins</span><span>Playwright</span></div>
           <div class="project-links">
@@ -474,22 +525,31 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         </figure>
       </article>
 
-      <article class="project">
-        <div>
-          <h3>More projects</h3>
-          <ul>
-            <li><a href="https://github.com/timothylai53/REAL-TIME-STOCK-MANAGEMENT-SYSTEM" target="_blank" rel="noopener">Real-time stock management</a>: a multi-threaded Java client–server inventory system with lock ordering to avoid deadlock, ReentrantLock, parallel streams and a concurrent stress test</li>
-            <li><a href="https://github.com/timothylai53/Campus-Food-Review" target="_blank" rel="noopener">Campus food review</a>: a PHP and MySQL app where students post, search, like and comment on meal reviews with photos</li>
-          </ul>
+      <div class="more">
+        <h3>More projects</h3>
+        <div class="more-grid">
+          <a class="mini" href="https://github.com/timothylai53/REAL-TIME-STOCK-MANAGEMENT-SYSTEM" target="_blank" rel="noopener">
+            <h4>Real-time stock management<span aria-hidden="true">↗</span></h4>
+            <p>Multi-threaded Java client–server inventory system with deadlock-safe locking and a concurrent stress test.</p>
+            <div class="stack-line"><span>Java 17</span><span>Sockets</span><span>Concurrency</span></div>
+          </a>
+          <a class="mini" href="https://github.com/timothylai53/Campus-Food-Review" target="_blank" rel="noopener">
+            <h4>Campus food review<span aria-hidden="true">↗</span></h4>
+            <p>Students post, search, like and comment on campus meal reviews with photos.</p>
+            <div class="stack-line"><span>PHP</span><span>MySQL</span><span>JavaScript</span></div>
+          </a>
         </div>
-      </article>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="section" id="stack">
   <div class="wrap">
-    <h2 class="section-label">Stack<span>Tools I use in projects</span></h2>
+    <div class="section-head">
+      <h2>Stack</h2>
+      <p>Tools I've used in the projects above.</p>
+    </div>
     <dl class="stack">
       <div class="stack-row"><dt>Languages</dt><dd><span>Java</span><span>Python</span><span>TypeScript</span><span>JavaScript</span><span>PHP</span><span>HTML</span><span>CSS</span></dd></div>
       <div class="stack-row"><dt>Front end</dt><dd><span>Vue.js</span><span>React</span><span>Angular</span></dd></div>
@@ -503,7 +563,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 <section class="section about" id="about">
   <div class="wrap">
-    <h2 class="section-label">About</h2>
+    <div class="section-head">
+      <h2>About</h2>
+    </div>
     <div>
       <p>
         I'm studying software engineering at Universiti Utara Malaysia. I like the
@@ -527,9 +589,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 <section class="section contact" id="contact">
   <div class="wrap">
-    <h2 class="section-label">Contact</h2>
     <div>
-      <h2>Want to talk about a project or a role? Send me a message.</h2>
+      <h2>Want to talk about a project or a role?</h2>
+      <p class="lead">Email is the quickest way to reach me.</p>
       <a class="mail" href="mailto:timothylai53@gmail.com">timothylai53@gmail.com</a>
       <div class="actions">
         <a class="btn primary" href="mailto:timothylai53@gmail.com"><svg aria-hidden="true"><use href="#i-mail"/></svg>Email me</a>
@@ -613,6 +675,17 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openDiagram(wrap); }
     });
   });
+
+  // Highlight the nav link for the section in view
+  const navLinks = [...document.querySelectorAll('.site-nav a')];
+  const spy = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      navLinks.forEach(a => a.toggleAttribute('aria-current', a.getAttribute('href') === '#' + e.target.id));
+      navLinks.forEach(a => { if (a.hasAttribute('aria-current')) a.setAttribute('aria-current', 'true'); });
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  document.querySelectorAll('main section[id]').forEach(sec => spy.observe(sec));
 
   // Draw each request path once when its diagram scrolls into view
   const io = new IntersectionObserver(entries => {
