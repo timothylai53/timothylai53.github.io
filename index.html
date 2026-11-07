@@ -296,8 +296,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
           </div>
         </div>
 
-        <figure class="figure">
-          <div class="panel">
+        <figure class="figure" data-tabs>
+          <div class="figure-tabs" role="tablist">
+            <button role="tab" aria-selected="true" data-panel="1">Screenshot</button>
+            <button role="tab" aria-selected="false" data-panel="0">Architecture</button>
+          </div>
+          <div class="panel" role="tabpanel" hidden>
             <svg class="arch" viewBox="0 0 560 300" role="img" aria-label="A React browser app uploads datasets to a FastAPI backend. The backend validates them, applies business rules and stores each reporting month in PostgreSQL, then returns report JSON and Excel workbooks.">
               <defs>
                 <marker id="a0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrow" d="M0 0L10 5L0 10z"/></marker>
@@ -318,7 +322,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
               <path class="edge draw" pathLength="1" d="M280 104V174" style="--t:.7s"/>
               <text class="sub" x="30" y="252">SLA · priority · remediation · Excel templates</text>
             </svg>
-            <figcaption>Upload in, reports and Excel workbooks out. All demo data is synthetic.</figcaption>
+            <figcaption>Upload in, reports and Excel workbooks out.</figcaption>
+          </div>
+          <div class="panel" role="tabpanel">
+            <img src="vmdash.jpg" alt="Vulnerability prioritization report: total and P1 to P4 counts, a summary table and a stacked bar chart" loading="lazy" data-shot>
+            <figcaption>Prioritization report generated from an uploaded dataset. Synthetic demo data; internal labels blurred.</figcaption>
           </div>
         </figure>
       </article>
@@ -347,10 +355,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
         <figure class="figure" data-tabs>
           <div class="figure-tabs" role="tablist">
-            <button role="tab" aria-selected="true" data-panel="0">Architecture</button>
-            <button role="tab" aria-selected="false" data-panel="1">Screenshot</button>
+            <button role="tab" aria-selected="true" data-panel="1">Screenshot</button>
+            <button role="tab" aria-selected="false" data-panel="0">Architecture</button>
           </div>
-          <div class="panel" role="tabpanel">
+          <div class="panel" role="tabpanel" hidden>
             <svg class="arch" viewBox="0 0 560 300" role="img" aria-label="Vue.js browser app calls a Node.js and Express REST API, which reads and writes MongoDB. The API is split into auth, order and AI modules and calls Stripe, SendGrid and Gemini.">
               <defs>
                 <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrow" d="M0 0L10 5L0 10z"/></marker>
@@ -373,7 +381,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
             </svg>
             <figcaption>Request path: browser to API to database. External services sit behind the API.</figcaption>
           </div>
-          <div class="panel" role="tabpanel" hidden>
+          <div class="panel" role="tabpanel">
             <img src="caterflowss.jpg" alt="Screenshot of the CaterFlow catering management system" loading="lazy" data-shot>
           </div>
         </figure>
@@ -405,10 +413,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
         <figure class="figure" data-tabs>
           <div class="figure-tabs" role="tablist">
-            <button role="tab" aria-selected="true" data-panel="0">Architecture</button>
-            <button role="tab" aria-selected="false" data-panel="1">Screenshot</button>
+            <button role="tab" aria-selected="true" data-panel="1">Screenshot</button>
+            <button role="tab" aria-selected="false" data-panel="0">Architecture</button>
           </div>
-          <div class="panel" role="tabpanel">
+          <div class="panel" role="tabpanel" hidden>
             <svg class="arch" viewBox="0 0 560 300" role="img" aria-label="Angular client calls a Spring Boot REST API backed by MySQL. A Jenkins pipeline builds, runs Playwright tests and pushes Docker images on each push.">
               <defs>
                 <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrow" d="M0 0L10 5L0 10z"/></marker>
@@ -434,7 +442,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
             </svg>
             <figcaption>Request path on top; delivery pipeline below.</figcaption>
           </div>
-          <div class="panel" role="tabpanel" hidden>
+          <div class="panel" role="tabpanel">
             <img src="conss.jpg" alt="Screenshot of the ScholarSync conference management platform" loading="lazy" data-shot>
           </div>
         </figure>
@@ -529,7 +537,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     // No screenshot file yet? Hide the tab instead of showing a broken image.
     // (Probe with a separate Image: the real one sits in a hidden panel and never loads.)
     const probe = new Image();
-    probe.onerror = () => { tabs[1].remove(); panels[1].remove(); };
+    probe.onerror = () => {
+      fig.querySelector('[data-panel="1"]').remove();
+      panels[1].remove();
+      panels[0].hidden = false;
+      fig.querySelector('[data-panel="0"]').setAttribute('aria-selected', 'true');
+    };
     probe.src = fig.querySelector('[data-shot]').getAttribute('src');
   });
 
