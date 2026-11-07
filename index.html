@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Timothy Lai | Software Engineer</title>
-<meta name="description" content="Timothy Lai, software engineering student at Universiti Utara Malaysia and software engineer intern. Full-stack web applications with Vue, React, Angular, Spring Boot, Node.js and FastAPI.">
+<meta name="description" content="Timothy Lai, software engineering student at Universiti Utara Malaysia (graduating Nov 2027) and software engineer intern. Full-stack web applications with Vue, React, Angular, Spring Boot, Node.js and FastAPI.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -104,7 +104,7 @@ a{color:inherit}
 
 /* ── Sections: label column + content column ── */
 .section{border-top:1px solid var(--rule);padding:clamp(56px,8vw,96px) 0}
-.section .wrap{display:grid;grid-template-columns:200px 1fr;gap:clamp(24px,4vw,56px)}
+.section .wrap{display:grid;grid-template-columns:200px minmax(0,1fr);gap:clamp(24px,4vw,56px)}
 .section-label{
     font-size:1rem;font-weight:600;
     position:sticky;top:92px;align-self:start;
@@ -208,7 +208,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     .project .figure{max-width:640px}
 }
 @media (max-width:900px){
-    .section .wrap{grid-template-columns:1fr}
+    .section .wrap{grid-template-columns:minmax(0,1fr)}
     .section-label{position:static}
 }
 @media (max-width:560px){
@@ -250,12 +250,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <div class="wrap">
     <!-- Update this line whenever your availability changes -->
     <p class="status">Software engineer intern · Sept 2026 – Mar 2027</p>
-    <h1>I build web applications end to end: interface, API and database.</h1>
+    <h1>I turn manual business processes into web apps.</h1>
     <p class="lead">
-      I'm Timothy Lai, a software engineering student at Universiti Utara Malaysia.
-      Most of my work is full-stack: Vue, React or Angular on the front end,
-      Spring Boot, Node.js or FastAPI behind it, and MySQL, MongoDB or PostgreSQL
-      underneath.
+      I'm Timothy Lai, a software engineering student at Universiti Utara Malaysia
+      (graduating Nov 2027). I've built a security reporting dashboard that cut a
+      2-hour job to 5 minutes, a catering booking marketplace, and a conference
+      review platform. I work across the stack: Vue, React or Angular in front;
+      Spring Boot, Node.js or FastAPI behind; MySQL, MongoDB or PostgreSQL underneath.
     </p>
     <div class="actions">
       <a class="btn primary" href="#projects">See my projects</a>
@@ -280,10 +281,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
           <h3>Vulnerability management reporting dashboard</h3>
           <p class="summary">
             My internship project. It replaces monthly vulnerability-management
-            reports that were built by hand in Excel with a web dashboard.
+            reports that were built by hand in Excel with a web dashboard, and cuts
+            report preparation from <strong>about 2 hours to 5 minutes</strong>.
           </p>
           <ul>
-            <li>Upload raw monthly datasets, then validate them and run them through SLA, priority and remediation business rules</li>
+            <li>Upload the raw monthly datasets and the reports generate themselves: validation, then SLA, priority and remediation business rules, all automated</li>
             <li>Reports on screen with the same default filters as the manual reports, plus drill-downs and month-to-month trends</li>
             <li>Excel export built from the original report templates, so PivotTables still refresh in Excel</li>
             <li>The same rules also ship as command-line scripts for people who want the workbook without the web app</li>
@@ -382,15 +384,17 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <div>
           <h3>ScholarSync: conference management platform</h3>
           <p class="summary">
-            An academic conference system built by a team of 8. I was the team lead.
+            An academic conference system built by a team of 8. I led the team.
             It covers the full cycle from paper submission to the final schedule.
           </p>
           <ul>
+            <li><strong>My role:</strong> split the work across 8 people, built my own share of the features, and led the frontend build</li>
+            <li>Combined everyone's pages into one Angular app and refined the layout so it looks and behaves consistently</li>
+            <li>Supported a teammate in setting up the Jenkins pipeline and its automated testing</li>
             <li>Roles for author, reviewer, chair and admin: paper submission, reviewer assignment, scoring against criteria, rebuttals and decisions</li>
             <li>Conference tracks, sessions, rooms and schedule, plus paid registration</li>
             <li>Spring Boot REST API with 27 resources, backed by MySQL through JPA</li>
             <li>A Jenkins pipeline that builds the stack, runs Playwright end-to-end tests and pushes versioned Docker images</li>
-            <li>Was deployed with Docker Compose on a DigitalOcean droplet</li>
           </ul>
           <div class="stack-line"><span>Angular</span><span>Spring Boot</span><span>MySQL</span><span>Docker</span><span>Jenkins</span><span>Playwright</span></div>
           <div class="project-links">
@@ -480,6 +484,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <dl class="facts">
         <div><dt>University</dt><dd>Universiti Utara Malaysia</dd></div>
         <div><dt>Programme</dt><dd>B.Sc. Software Engineering</dd></div>
+        <div><dt>Graduating</dt><dd>November 2027</dd></div>
         <div><dt>Currently</dt><dd>Software engineer intern</dd></div>
         <div><dt>Location</dt><dd>Malaysia</dd></div>
       </dl>
