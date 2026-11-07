@@ -150,6 +150,26 @@ a{color:inherit}
 .panel[hidden]{display:none}
 .panel img{display:block;width:100%;height:auto;border-radius:4px;border:1px solid var(--rule)}
 .panel figcaption{margin-top:12px;font-size:.9rem;color:var(--muted)}
+.zoom{display:block;position:relative;cursor:zoom-in;border-radius:4px}
+.zoom::after{
+    content:"Click to enlarge";position:absolute;right:10px;bottom:10px;
+    font-size:.8rem;padding:4px 9px;border-radius:4px;
+    background:rgba(19,32,51,.82);color:#fff;
+    opacity:.85;transition:opacity .15s;pointer-events:none;
+}
+.zoom:hover::after,.zoom:focus-visible::after{opacity:1}
+.lightbox{
+    border:0;padding:0;margin:auto;background:transparent;
+    max-width:none;max-height:none;width:100vw;height:100vh;
+}
+.lightbox::backdrop{background:rgba(8,12,20,.88)}
+.lightbox[open]{display:flex;align-items:center;justify-content:center;cursor:zoom-out}
+.lightbox img{max-width:min(96vw,1600px);max-height:92vh;width:auto;height:auto;border-radius:6px;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+.lightbox button{
+    position:fixed;top:14px;right:14px;
+    font:inherit;font-size:.95rem;padding:8px 14px;border-radius:6px;cursor:pointer;
+    border:1px solid rgba(255,255,255,.35);background:rgba(19,32,51,.7);color:#fff;
+}
 
 /* architecture diagrams */
 .arch{display:block;width:100%;height:auto}
@@ -325,7 +345,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
             <figcaption>Upload in, reports and Excel workbooks out.</figcaption>
           </div>
           <div class="panel" role="tabpanel">
-            <img src="vmdash.jpg" alt="Vulnerability prioritization report: total and P1 to P4 counts, a summary table and a stacked bar chart" loading="lazy" data-shot>
+            <a class="zoom" href="vmdash.jpg" target="_blank" rel="noopener"><img src="vmdash.jpg" alt="Vulnerability prioritization report: total and P1 to P4 counts, a summary table and a stacked bar chart" loading="lazy" data-shot></a>
             <figcaption>Prioritization report generated from an uploaded dataset. Synthetic demo data; internal labels blurred.</figcaption>
           </div>
         </figure>
@@ -382,7 +402,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
             <figcaption>Request path: browser to API to database. External services sit behind the API.</figcaption>
           </div>
           <div class="panel" role="tabpanel">
-            <img src="caterflowss.jpg" alt="Screenshot of the CaterFlow catering management system" loading="lazy" data-shot>
+            <a class="zoom" href="caterflowss.jpg" target="_blank" rel="noopener"><img src="caterflowss.jpg" alt="Screenshot of the CaterFlow catering management system" loading="lazy" data-shot></a>
           </div>
         </figure>
       </article>
@@ -443,7 +463,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
             <figcaption>Request path on top; delivery pipeline below.</figcaption>
           </div>
           <div class="panel" role="tabpanel">
-            <img src="conss.jpg" alt="Screenshot of the ScholarSync conference management platform" loading="lazy" data-shot>
+            <a class="zoom" href="conss.jpg" target="_blank" rel="noopener"><img src="conss.jpg" alt="ScholarSync admin dashboard with user, paper, review and conference counts and an activity log" loading="lazy" data-shot></a>
           </div>
         </figure>
       </article>
@@ -545,6 +565,23 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     };
     probe.src = fig.querySelector('[data-shot]').getAttribute('src');
   });
+
+  // Click a screenshot to view it full size
+  const box = document.createElement('dialog');
+  box.className = 'lightbox';
+  box.innerHTML = '<img alt=""><button type="button">Close</button>';
+  document.body.append(box);
+  const boxImg = box.querySelector('img');
+  box.addEventListener('click', () => box.close());
+  box.addEventListener('close', () => { boxImg.removeAttribute('src'); });
+  document.querySelectorAll('.zoom').forEach(link => link.addEventListener('click', e => {
+    if (typeof box.showModal !== 'function') return; // old browser: follow the link instead
+    e.preventDefault();
+    const img = link.querySelector('img');
+    boxImg.src = link.getAttribute('href');
+    boxImg.alt = img.alt;
+    box.showModal();
+  }));
 
   // Draw each request path once when its diagram scrolls into view
   const io = new IntersectionObserver(entries => {
