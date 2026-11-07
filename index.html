@@ -165,6 +165,12 @@ a{color:inherit}
 .lightbox::backdrop{background:rgba(8,12,20,.88)}
 .lightbox[open]{display:flex;align-items:center;justify-content:center;cursor:zoom-out}
 .lightbox img{max-width:min(96vw,1600px);max-height:92vh;width:auto;height:auto;border-radius:6px;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+.lightbox .lb-diagram{
+    width:min(96vw,1100px);max-height:92vh;padding:clamp(12px,3vw,32px);
+    background:var(--surface);border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,.5);
+}
+.lightbox .lb-diagram svg{display:block;width:100%;height:auto;max-height:calc(92vh - 64px)}
+.zoom-svg{display:block}
 .lightbox button{
     position:fixed;top:14px;right:14px;
     font:inherit;font-size:.95rem;padding:8px 14px;border-radius:6px;cursor:pointer;
@@ -322,7 +328,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
             <button role="tab" aria-selected="false" data-panel="0">Architecture</button>
           </div>
           <div class="panel" role="tabpanel" hidden>
-            <svg class="arch" viewBox="0 0 560 300" role="img" aria-label="A React browser app uploads datasets to a FastAPI backend. The backend validates them, applies business rules and stores each reporting month in PostgreSQL, then returns report JSON and Excel workbooks.">
+            <div class="zoom zoom-svg" role="button" tabindex="0" aria-label="Enlarge architecture diagram"><svg class="arch" viewBox="0 0 560 300" role="img" aria-label="A React browser app uploads datasets to a FastAPI backend. The backend validates them, applies business rules and stores each reporting month in PostgreSQL, then returns report JSON and Excel workbooks.">
               <defs>
                 <marker id="a0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrow" d="M0 0L10 5L0 10z"/></marker>
               </defs>
@@ -341,7 +347,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
               <g class="node mod"><rect x="380" y="176" width="150" height="44" rx="5"/><text x="394" y="203">report + export</text></g>
               <path class="edge draw" pathLength="1" d="M280 104V174" style="--t:.7s"/>
               <text class="sub" x="30" y="252">SLA · priority · remediation · Excel templates</text>
-            </svg>
+            </svg></div>
             <figcaption>Upload in, reports and Excel workbooks out.</figcaption>
           </div>
           <div class="panel" role="tabpanel">
@@ -379,7 +385,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
             <button role="tab" aria-selected="false" data-panel="0">Architecture</button>
           </div>
           <div class="panel" role="tabpanel" hidden>
-            <svg class="arch" viewBox="0 0 560 300" role="img" aria-label="Vue.js browser app calls a Node.js and Express REST API, which reads and writes MongoDB. The API is split into auth, order and AI modules and calls Stripe, SendGrid and Gemini.">
+            <div class="zoom zoom-svg" role="button" tabindex="0" aria-label="Enlarge architecture diagram"><svg class="arch" viewBox="0 0 560 300" role="img" aria-label="Vue.js browser app calls a Node.js and Express REST API, which reads and writes MongoDB. The API is split into auth, order and AI modules and calls Stripe, SendGrid and Gemini.">
               <defs>
                 <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrow" d="M0 0L10 5L0 10z"/></marker>
               </defs>
@@ -398,7 +404,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
               <g class="node mod"><rect x="428" y="176" width="104" height="44" rx="5"/><text x="442" y="203">ai</text></g>
               <path class="edge draw" pathLength="1" d="M280 104V138" style="--t:.7s"/>
               <text class="sub" x="200" y="252">Stripe · SendGrid · Gemini</text>
-            </svg>
+            </svg></div>
             <figcaption>Request path: browser to API to database. External services sit behind the API.</figcaption>
           </div>
           <div class="panel" role="tabpanel">
@@ -437,7 +443,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
             <button role="tab" aria-selected="false" data-panel="0">Architecture</button>
           </div>
           <div class="panel" role="tabpanel" hidden>
-            <svg class="arch" viewBox="0 0 560 300" role="img" aria-label="Angular client calls a Spring Boot REST API backed by MySQL. A Jenkins pipeline builds, runs Playwright tests and pushes Docker images on each push.">
+            <div class="zoom zoom-svg" role="button" tabindex="0" aria-label="Enlarge architecture diagram"><svg class="arch" viewBox="0 0 560 300" role="img" aria-label="Angular client calls a Spring Boot REST API backed by MySQL. A Jenkins pipeline builds, runs Playwright tests and pushes Docker images on each push.">
               <defs>
                 <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrow" d="M0 0L10 5L0 10z"/></marker>
                 <marker id="a2s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrow soft" d="M0 0L10 5L0 10z"/></marker>
@@ -459,7 +465,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
               <path class="edge soft" d="M170 220H208" marker-end="url(#a2s)"/>
               <path class="edge soft" d="M350 220H388" marker-end="url(#a2s)"/>
               <path class="edge soft" d="M460 196V150H280V106" marker-end="url(#a2s)"/>
-            </svg>
+            </svg></div>
             <figcaption>Request path on top; delivery pipeline below.</figcaption>
           </div>
           <div class="panel" role="tabpanel">
@@ -569,19 +575,45 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   // Click a screenshot to view it full size
   const box = document.createElement('dialog');
   box.className = 'lightbox';
-  box.innerHTML = '<img alt=""><button type="button">Close</button>';
+  box.innerHTML = '<div class="lb-body"></div><button type="button">Close</button>';
   document.body.append(box);
-  const boxImg = box.querySelector('img');
+  const boxBody = box.querySelector('.lb-body');
+  const canZoom = typeof box.showModal === 'function';
   box.addEventListener('click', () => box.close());
-  box.addEventListener('close', () => { boxImg.removeAttribute('src'); });
-  document.querySelectorAll('.zoom').forEach(link => link.addEventListener('click', e => {
-    if (typeof box.showModal !== 'function') return; // old browser: follow the link instead
+  box.addEventListener('close', () => boxBody.replaceChildren());
+
+  document.querySelectorAll('a.zoom').forEach(link => link.addEventListener('click', e => {
+    if (!canZoom) return; // old browser: follow the link instead
     e.preventDefault();
-    const img = link.querySelector('img');
-    boxImg.src = link.getAttribute('href');
-    boxImg.alt = img.alt;
+    const img = new Image();
+    img.src = link.getAttribute('href');
+    img.alt = link.querySelector('img').alt;
+    boxBody.replaceChildren(img);
     box.showModal();
   }));
+
+  // Diagrams are inline SVG: show a copy with its own marker ids
+  const openDiagram = wrap => {
+    const svg = wrap.querySelector('svg').cloneNode(true);
+    svg.querySelectorAll('[id]').forEach(el => {
+      const old = el.id;
+      el.id = old + '-lb';
+      svg.querySelectorAll('[marker-end="url(#' + old + ')"]').forEach(x => x.setAttribute('marker-end', 'url(#' + old + '-lb)'));
+    });
+    svg.classList.add('drawn');
+    const frame = document.createElement('div');
+    frame.className = 'lb-diagram';
+    frame.append(svg);
+    boxBody.replaceChildren(frame);
+    box.showModal();
+  };
+  document.querySelectorAll('.zoom-svg').forEach(wrap => {
+    if (!canZoom) { wrap.classList.remove('zoom'); wrap.removeAttribute('role'); wrap.removeAttribute('tabindex'); return; }
+    wrap.addEventListener('click', () => openDiagram(wrap));
+    wrap.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openDiagram(wrap); }
+    });
+  });
 
   // Draw each request path once when its diagram scrolls into view
   const io = new IntersectionObserver(entries => {
