@@ -7,7 +7,7 @@
 <meta name="description" content="Timothy Lai, software engineering student at Universiti Utara Malaysia (graduating Nov 2027) and software engineer intern. Full-stack web applications with Vue, React, Angular, Spring Boot, Node.js and FastAPI.">
 
 <meta property="og:title" content="Timothy Lai | Software Engineer">
-<meta property="og:description" content="Software engineering student at UUM and software engineer intern. Full-stack web apps: a reporting dashboard that cut a 2-hour job to 5 minutes, a catering marketplace and a conference platform.">
+<meta property="og:description" content="Software engineering student at UUM and software engineer intern. Full-stack web apps: a reporting dashboard that cut a 2-hour job to 5 minutes, an AI job search assistant, a catering marketplace and a conference platform.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://timothylai53.github.io/">
 <meta property="og:image" content="https://timothylai53.github.io/vmdash.jpg">
@@ -328,7 +328,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <h1>I turn manual business processes into web apps.</h1>
     <p class="lead">
       I'm Timothy Lai, a software engineering student at Universiti Utara Malaysia,
-      graduating Nov 2027. My latest build, a security reporting dashboard, cut a
+      graduating Nov 2027. At my internship, I built a security reporting dashboard that cut a
       2-hour monthly job to 5 minutes. I work across the stack, from the database
       to the screen.
     </p>
@@ -405,6 +405,64 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
           <div class="panel" role="tabpanel">
             <a class="zoom" href="vmdash.jpg" target="_blank" rel="noopener"><img src="vmdash.jpg" alt="Vulnerability prioritization report: total and P1 to P4 counts, a summary table and a stacked bar chart" loading="lazy" data-shot></a>
             <figcaption>Prioritization report generated from an uploaded dataset. Synthetic demo data; internal labels blurred.</figcaption>
+          </div>
+        </figure>
+      </article>
+
+      <!-- ── Project: JobFinder ── -->
+      <article class="project">
+        <div>
+          <p class="eyebrow">Personal project · 2026</p>
+          <h3>JobFinder: AI job search assistant</h3>
+          <p class="summary">A local-only assistant that finds job ads, scores them against my experience and tailors resumes, without letting the AI invent anything.</p>
+          <dl class="keyfacts">
+            <div><dt>Automated tests</dt><dd>500+</dd></div>
+            <div><dt>AI output</dt><dd>Fact-checked</dd></div>
+            <div><dt>Runs</dt><dd>100% local</dd></div>
+          </dl>
+          <ul>
+            <li>Scores each job 0–100 against my experience, explaining every line with the evidence behind it</li>
+            <li>Tailors resumes and cover letters with a local or free AI; a code-level guard flags any skill, number or claim that isn't in my real experience</li>
+            <li>Fetches Malaysian job ads politely, merges duplicates across sites, and tracks applications on a Kanban board</li>
+          </ul>
+          <div class="stack-line"><span>Python</span><span>FastAPI</span><span>SQLite</span><span>React</span><span>TypeScript</span><span>Tailwind</span><span>Playwright</span></div>
+          <div class="project-links">
+            <a href="https://github.com/timothylai53/jobfinder" target="_blank" rel="noopener">Source code</a>
+            <a href="https://github.com/timothylai53/jobfinder/blob/main/docs/demo.mp4" target="_blank" rel="noopener">Demo video</a>
+          </div>
+        </div>
+
+        <figure class="figure" data-tabs>
+          <div class="figure-tabs" role="tablist">
+            <button role="tab" aria-selected="true" data-panel="1">Screenshot</button>
+            <button role="tab" aria-selected="false" data-panel="0">Architecture</button>
+          </div>
+          <div class="panel" role="tabpanel" hidden>
+            <div class="zoom zoom-svg" role="button" tabindex="0" aria-label="Enlarge architecture diagram"><svg class="arch" viewBox="0 0 560 300" role="img" aria-label="A React app calls a FastAPI backend on localhost, which stores everything in SQLite. The backend has a fetcher for job sites, a rule-based matcher and an AI module whose replies pass through a fabrication guard.">
+              <defs>
+                <marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrow" d="M0 0L10 5L0 10z"/></marker>
+              </defs>
+              <g class="node"><rect x="16" y="40" width="148" height="64" rx="6"/><text x="32" y="68">Browser</text><text class="sub" x="32" y="88">React + TS</text></g>
+              <g class="node"><rect x="206" y="40" width="148" height="64" rx="6"/><text x="222" y="68">API</text><text class="sub" x="222" y="88">FastAPI, localhost</text></g>
+              <g class="node store"><rect x="396" y="40" width="148" height="64" rx="6"/><text x="412" y="68">SQLite</text><text class="sub" x="412" y="88">one local file</text></g>
+
+              <path class="edge draw" pathLength="1" d="M164 72H204" marker-end="url(#a3)" style="--t:0s"/>
+              <text class="edge-label" x="168" y="62" style="--t:0s">JSON</text>
+              <path class="edge draw" pathLength="1" d="M354 72H394" marker-end="url(#a3)" style="--t:.35s"/>
+
+              <rect class="lane" x="16" y="140" width="528" height="136" rx="6"/>
+              <text class="sub" x="30" y="162">Backend modules</text>
+              <g class="node mod"><rect x="30" y="176" width="150" height="44" rx="5"/><text x="44" y="203">polite fetcher</text></g>
+              <g class="node mod"><rect x="205" y="176" width="150" height="44" rx="5"/><text x="219" y="203">rule matcher</text></g>
+              <g class="node mod"><rect x="380" y="176" width="150" height="44" rx="5"/><text x="394" y="203">AI + guard</text></g>
+              <path class="edge draw" pathLength="1" d="M280 104V174" style="--t:.7s"/>
+              <text class="sub" x="30" y="252">JobStreet · LinkedIn · Ollama or copy-paste AI</text>
+            </svg></div>
+            <figcaption>Everything runs on one laptop; AI replies are checked in code before you see them.</figcaption>
+          </div>
+          <div class="panel" role="tabpanel">
+            <a class="zoom" href="jobfinder.jpg" target="_blank" rel="noopener"><img src="jobfinder.jpg" alt="JobFinder tailor-resume review: an AI summary claiming Kubernetes and a 60% cost cut is flagged in red because neither is in the experience bank" loading="lazy" data-shot></a>
+            <figcaption>The fabrication guard at work: invented skills and numbers are flagged before they reach a resume. Fake demo data.</figcaption>
           </div>
         </figure>
       </article>
@@ -552,11 +610,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     </div>
     <dl class="stack">
       <div class="stack-row"><dt>Languages</dt><dd><span>Java</span><span>Python</span><span>TypeScript</span><span>JavaScript</span><span>PHP</span><span>HTML</span><span>CSS</span></dd></div>
-      <div class="stack-row"><dt>Front end</dt><dd><span>Vue.js</span><span>React</span><span>Angular</span></dd></div>
+      <div class="stack-row"><dt>Front end</dt><dd><span>Vue.js</span><span>React</span><span>Angular</span><span>Tailwind CSS</span></dd></div>
       <div class="stack-row"><dt>Back end</dt><dd><span>Spring Boot</span><span>Node.js / Express</span><span>FastAPI</span><span>pandas</span><span>REST APIs</span></dd></div>
-      <div class="stack-row"><dt>Databases</dt><dd><span>MySQL</span><span>PostgreSQL</span><span>MongoDB</span></dd></div>
-      <div class="stack-row"><dt>DevOps</dt><dd><span>Git</span><span>GitHub</span><span>Docker</span><span>Jenkins</span></dd></div>
-      <div class="stack-row"><dt>Design and testing</dt><dd><span>Figma</span><span>Postman</span><span>Playwright</span><span>pytest</span></dd></div>
+      <div class="stack-row"><dt>Databases</dt><dd><span>MySQL</span><span>PostgreSQL</span><span>MongoDB</span><span>SQLite</span></dd></div>
+      <div class="stack-row"><dt>DevOps</dt><dd><span>Git</span><span>GitHub</span><span>GitHub Actions</span><span>Docker</span><span>Jenkins</span></dd></div>
+      <div class="stack-row"><dt>Design and testing</dt><dd><span>Figma</span><span>Postman</span><span>Playwright</span><span>pytest</span><span>Vitest</span></dd></div>
     </dl>
   </div>
 </section>
